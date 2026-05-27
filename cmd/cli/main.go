@@ -7,7 +7,6 @@ import (
 	"github.com/K-Phoen/grabana/cmd/cli/cmd"
 	"github.com/spf13/cobra"
 	"go.uber.org/zap"
-	"go.uber.org/zap/zapcore"
 )
 
 var version = "SNAPSHOT"
@@ -34,24 +33,4 @@ func main() {
 	}
 }
 
-func createLogger() (*zap.Logger, error) {
-	encoderCfg := zap.NewProductionEncoderConfig()
-	encoderCfg.EncodeTime = zapcore.RFC3339TimeEncoder
-	encoderCfg.EncodeLevel = zapcore.CapitalColorLevelEncoder
-
-	cfg := zap.Config{
-		Level:             zap.NewAtomicLevelAt(zap.InfoLevel),
-		Development:       false,
-		DisableStacktrace: true,
-		Sampling: &zap.SamplingConfig{
-			Initial:    100,
-			Thereafter: 100,
-		},
-		Encoding:         "console",
-		EncoderConfig:    encoderCfg,
-		OutputPaths:      []string{"stderr"},
-		ErrorOutputPaths: []string{"stderr"},
-	}
-
-	return cfg.Build()
-}
+func createLogger() (*zap.Logger, error) { _ = "STUB: not implemented"; return nil, nil }

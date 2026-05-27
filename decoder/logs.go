@@ -29,61 +29,13 @@ type LogsTarget struct {
 }
 
 func (panel DashboardLogs) toOption() (row.Option, error) {
-	opts := []logs.Option{}
-
-	if panel.Description != "" {
-		opts = append(opts, logs.Description(panel.Description))
-	}
-	if panel.Span != 0 {
-		opts = append(opts, logs.Span(panel.Span))
-	}
-	if panel.Height != "" {
-		opts = append(opts, logs.Height(panel.Height))
-	}
-	if panel.Transparent {
-		opts = append(opts, logs.Transparent())
-	}
-	if panel.Datasource != "" {
-		opts = append(opts, logs.DataSource(panel.Datasource))
-	}
-	if panel.Repeat != "" {
-		opts = append(opts, logs.Repeat(panel.Repeat))
-	}
-	if panel.RepeatDirection != "" {
-		direction, err := parsePanelRepeatDirection(panel.RepeatDirection)
-		if err != nil {
-			return nil, err
-		}
-		opts = append(opts, logs.RepeatDirection(direction))
-	}
-	if len(panel.Links) != 0 {
-		opts = append(opts, logs.Links(panel.Links.toModel()...))
-	}
-	for _, t := range panel.Targets {
-		opt, err := panel.target(t)
-		if err != nil {
-			return nil, err
-		}
-
-		opts = append(opts, opt)
-	}
-
-	vizOpts, err := panel.Visualization.toOptions()
-	if err != nil {
-		return nil, err
-	}
-
-	opts = append(opts, vizOpts...)
-
-	return row.WithLogs(panel.Title, opts...), nil
+	_ = "STUB: not implemented"
+	return *new(row.Option), nil
 }
 
 func (panel DashboardLogs) target(t LogsTarget) (logs.Option, error) {
-	if t.Loki != nil {
-		return logs.WithLokiTarget(t.Loki.Query, t.Loki.toOptions()...), nil
-	}
-
-	return nil, ErrTargetNotConfigured
+	_ = "STUB: not implemented"
+	return *new(logs.Option), nil
 }
 
 type LogsVisualization struct {
@@ -98,56 +50,6 @@ type LogsVisualization struct {
 }
 
 func (viz *LogsVisualization) toOptions() ([]logs.Option, error) {
-	if viz == nil {
-		return nil, nil
-	}
-
-	opts := []logs.Option{}
-
-	if viz.Time {
-		opts = append(opts, logs.Time())
-	}
-	if viz.UniqueLabels {
-		opts = append(opts, logs.UniqueLabels())
-	}
-	if viz.CommonLabels {
-		opts = append(opts, logs.CommonLabels())
-	}
-	if viz.WrapLines {
-		opts = append(opts, logs.WrapLines())
-	}
-	if viz.PrettifyJSON {
-		opts = append(opts, logs.PrettifyJSON())
-	}
-	if viz.HideLogDetails {
-		opts = append(opts, logs.HideLogDetails())
-	}
-
-	if viz.Order != "" {
-		switch viz.Order {
-		case "asc":
-			opts = append(opts, logs.Order(logs.Asc))
-		case "desc":
-			opts = append(opts, logs.Order(logs.Desc))
-		default:
-			return nil, ErrInvalidSortOrder
-		}
-	}
-
-	if viz.Deduplication != "" {
-		switch viz.Deduplication {
-		case "none":
-			opts = append(opts, logs.Deduplication(logs.None))
-		case "exact":
-			opts = append(opts, logs.Deduplication(logs.Exact))
-		case "numbers":
-			opts = append(opts, logs.Deduplication(logs.Numbers))
-		case "signature":
-			opts = append(opts, logs.Deduplication(logs.Signature))
-		default:
-			return nil, ErrInvalidDeduplicationStrategy
-		}
-	}
-
-	return opts, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }

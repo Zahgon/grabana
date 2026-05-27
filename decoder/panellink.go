@@ -6,15 +6,7 @@ import (
 
 type DashboardPanelLinks []DashboardPanelLink
 
-func (collection DashboardPanelLinks) toModel() []links.Link {
-	models := make([]links.Link, 0, len(collection))
-
-	for _, link := range collection {
-		models = append(models, link.toModel())
-	}
-
-	return models
-}
+func (collection DashboardPanelLinks) toModel() []links.Link { _ = "STUB: not implemented"; return nil }
 
 type DashboardPanelLink struct {
 	Title        string
@@ -23,9 +15,6 @@ type DashboardPanelLink struct {
 }
 
 func (l DashboardPanelLink) toModel() links.Link {
-	if l.OpenInNewTab {
-		return links.New(l.Title, l.URL, links.OpenBlank())
-	}
-
-	return links.New(l.Title, l.URL)
+	_ = "STUB: not implemented"
+	return *new(links.Link)
 }

@@ -68,12 +68,14 @@ type Stackdriver struct {
 
 // Delta represents the change in a value during a time interval.
 func Delta(metricType string, options ...Option) *Stackdriver {
-	return newMetric("DELTA", metricType, options...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Gauge represents an instantaneous measurement of a value.
 func Gauge(metricType string, options ...Option) *Stackdriver {
-	return newMetric("GAUGE", metricType, options...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Cumulative represents a value accumulated over a time interval. Cumulative
@@ -81,105 +83,49 @@ func Gauge(metricType string, options ...Option) *Stackdriver {
 // increasing end times, until an event resets the cumulative value to zero
 // and sets a new start time for the following points.
 func Cumulative(metricType string, options ...Option) *Stackdriver {
-	return newMetric("CUMULATIVE", metricType, options...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func newMetric(metricKind string, metricType string, options ...Option) *Stackdriver {
-	stackdriver := &Stackdriver{
-		Builder: &sdk.Target{
-			MetricType:   metricType,
-			MetricKind:   metricKind,
-			AlignOptions: []sdk.StackdriverAlignOptions{defaultAlignmentOpts()},
-			ValueType:    "INT64",
-		},
-	}
-
-	for _, opt := range append(defaults(), options...) {
-		opt(stackdriver)
-	}
-
-	return stackdriver
+	_ = "STUB: not implemented"
+	return nil
 }
 
-func defaults() []Option {
-	return []Option{
-		Aggregation(ReduceMean),
-		Alignment(AlignDelta, AlignmentStackdriverAuto),
-	}
-}
+func defaults() []Option { _ = "STUB: not implemented"; return nil }
 
 // Ref sets the reference ID for this query.
-func Ref(ref string) Option {
-	return func(stackdriver *Stackdriver) {
-		stackdriver.Builder.RefID = ref
-	}
-}
+func Ref(ref string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Hide the query. Grafana does not send hidden queries to the data source,
 // but they can still be referenced in alerts.
-func Hide() Option {
-	return func(stackdriver *Stackdriver) {
-		stackdriver.Builder.Hide = true
-	}
-}
+func Hide() Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Legend sets the legend format.
 // See https://grafana.com/docs/grafana/latest/features/datasources/stackdriver/#alias-patterns for more
 // information on allowed patterns.
-func Legend(legend string) Option {
-	return func(stackdriver *Stackdriver) {
-		stackdriver.Builder.AliasBy = legend
-	}
-}
+func Legend(legend string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Project defines the GCP project to use for this target.
-func Project(project string) Option {
-	return func(stackdriver *Stackdriver) {
-		stackdriver.Builder.ProjectName = project
-	}
-}
+func Project(project string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Aggregation defines how the time series will be aggregated.
-func Aggregation(reducer Reducer) Option {
-	return func(stackdriver *Stackdriver) {
-		stackdriver.Builder.CrossSeriesReducer = string(reducer)
-	}
-}
+func Aggregation(reducer Reducer) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Alignment defines how the time series will be aligned.
 func Alignment(aligner Aligner, alignmentPeriod string) Option {
-	return func(stackdriver *Stackdriver) {
-		stackdriver.Builder.AlignmentPeriod = alignmentPeriod
-		stackdriver.Builder.PerSeriesAligner = string(aligner)
-	}
+	_ = "STUB: not implemented"
+	return *new(Option)
 }
 
 // Preprocessor defines how the time series should be pre-processed.
 func Preprocessor(preprocessor PreprocessorMethod) Option {
-	return func(stackdriver *Stackdriver) {
-		stackdriver.Builder.Preprocessor = string(preprocessor)
-	}
+	_ = "STUB: not implemented"
+	return *new(Option)
 }
 
 // Filter allows to specify which time series will be in the results.
-func Filter(filters ...FilterOption) Option {
-	return func(stackdriver *Stackdriver) {
-		for i, filterOpt := range filters {
-			f := &filter{}
-			filterOpt(f)
-
-			if i != 0 || len(stackdriver.Builder.Filters) != 0 {
-				stackdriver.Builder.Filters = append(stackdriver.Builder.Filters, "AND")
-			}
-
-			stackdriver.Builder.Filters = append(stackdriver.Builder.Filters, f.leftOperand, f.operator, f.rightOperand)
-		}
-	}
-}
+func Filter(filters ...FilterOption) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // GroupBys defines a list of fields to group the query by.
-func GroupBys(groupBys ...string) Option {
-	return func(stackdriver *Stackdriver) {
-		stackdriver.Builder.GroupBys = groupBys
-	}
-}
+func GroupBys(groupBys ...string) Option { _ = "STUB: not implemented"; return *new(Option) }

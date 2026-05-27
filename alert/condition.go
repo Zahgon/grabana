@@ -64,50 +64,33 @@ type condition struct {
 }
 
 func newCondition(reducer QueryReducer, queryRef string, evaluator ConditionEvaluator) *condition {
-	cond := &condition{
-		builder: &sdk.AlertCondition{
-			Type:    "query",
-			Query:   sdk.AlertConditionQueryRef{Params: []string{queryRef}},
-			Reducer: sdk.AlertReducer{Type: string(reducer), Params: []string{}},
-		},
-	}
-
-	evaluator(cond)
-
-	return cond
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // HasNoValue will match queries returning no value.
-func HasNoValue() ConditionEvaluator {
-	return func(cond *condition) {
-		cond.builder.Evaluator = sdk.AlertEvaluator{Type: "no_value", Params: []float64{}}
-	}
-}
+func HasNoValue() ConditionEvaluator { _ = "STUB: not implemented"; return *new(ConditionEvaluator) }
 
 // IsAbove will match queries returning a value above the given threshold.
 func IsAbove(value float64) ConditionEvaluator {
-	return func(cond *condition) {
-		cond.builder.Evaluator = sdk.AlertEvaluator{Type: "gt", Params: []float64{value}}
-	}
+	_ = "STUB: not implemented"
+	return *new(ConditionEvaluator)
 }
 
 // IsBelow will match queries returning a value below the given threshold.
 func IsBelow(value float64) ConditionEvaluator {
-	return func(cond *condition) {
-		cond.builder.Evaluator = sdk.AlertEvaluator{Type: "lt", Params: []float64{value}}
-	}
+	_ = "STUB: not implemented"
+	return *new(ConditionEvaluator)
 }
 
 // IsOutsideRange will match queries returning a value outside the given range.
 func IsOutsideRange(min float64, max float64) ConditionEvaluator {
-	return func(cond *condition) {
-		cond.builder.Evaluator = sdk.AlertEvaluator{Type: "outside_range", Params: []float64{min, max}}
-	}
+	_ = "STUB: not implemented"
+	return *new(ConditionEvaluator)
 }
 
 // IsWithinRange will match queries returning a value within the given range.
 func IsWithinRange(min float64, max float64) ConditionEvaluator {
-	return func(cond *condition) {
-		cond.builder.Evaluator = sdk.AlertEvaluator{Type: "within_range", Params: []float64{min, max}}
-	}
+	_ = "STUB: not implemented"
+	return *new(ConditionEvaluator)
 }

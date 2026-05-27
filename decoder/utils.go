@@ -1,26 +1,14 @@
 package decoder
 
 import (
-	"fmt"
-
 	"github.com/K-Phoen/sdk"
 )
 
-func intPtr(input int) *int {
-	return &input
-}
+func intPtr(input int) *int { _ = "STUB: not implemented"; return nil }
 
-func float64Ptr(input float64) *float64 {
-	return &input
-}
+func float64Ptr(input float64) *float64 { _ = "STUB: not implemented"; return nil }
 
 func parsePanelRepeatDirection(input string) (sdk.RepeatDirection, error) {
-	switch input {
-	case "vertical":
-		return sdk.RepeatDirectionVertical, nil
-	case "horizontal":
-		return sdk.RepeatDirectionHorizontal, nil
-	}
-
-	return "", fmt.Errorf("invalid repeat direction '%s'", input)
+	_ = "STUB: not implemented"
+	return *new(sdk.RepeatDirection), nil
 }

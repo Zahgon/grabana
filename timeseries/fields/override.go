@@ -21,73 +21,28 @@ const (
 type OverrideOption func(field *sdk.FieldConfigOverride)
 
 // Unit overrides the unit.
-func Unit(unit string) OverrideOption {
-	return func(field *sdk.FieldConfigOverride) {
-		field.Properties = append(field.Properties,
-			sdk.FieldConfigOverrideProperty{
-				ID:    "unit",
-				Value: unit,
-			})
-	}
-}
+func Unit(unit string) OverrideOption { _ = "STUB: not implemented"; return *new(OverrideOption) }
 
 // FillOpacity overrides the opacity.
 func FillOpacity(opacity int) OverrideOption {
-	return func(field *sdk.FieldConfigOverride) {
-		field.Properties = append(field.Properties,
-			sdk.FieldConfigOverrideProperty{
-				ID:    "custom.fillOpacity",
-				Value: opacity,
-			})
-	}
+	_ = "STUB: not implemented"
+	return *new(OverrideOption)
 }
 
 // FixedColorScheme forces the use of a fixed color scheme.
 func FixedColorScheme(color string) OverrideOption {
-	return func(field *sdk.FieldConfigOverride) {
-		field.Properties = append(field.Properties,
-			sdk.FieldConfigOverrideProperty{
-				ID: "color",
-				Value: map[string]string{
-					"mode":       "fixed",
-					"fixedColor": color,
-				},
-			})
-	}
+	_ = "STUB: not implemented"
+	return *new(OverrideOption)
 }
 
 // NegativeY flips the results to negative values on the Y axis.
-func NegativeY() OverrideOption {
-	return func(field *sdk.FieldConfigOverride) {
-		field.Properties = append(field.Properties,
-			sdk.FieldConfigOverrideProperty{
-				ID:    "custom.transform",
-				Value: "negative-Y",
-			})
-	}
-}
+func NegativeY() OverrideOption { _ = "STUB: not implemented"; return *new(OverrideOption) }
 
 // AxisPlacement overrides how the axis should be placed in the panel.
 func AxisPlacement(placement axis.PlacementMode) OverrideOption {
-	return func(field *sdk.FieldConfigOverride) {
-		field.Properties = append(field.Properties,
-			sdk.FieldConfigOverrideProperty{
-				ID:    "custom.axisPlacement",
-				Value: string(placement),
-			})
-	}
+	_ = "STUB: not implemented"
+	return *new(OverrideOption)
 }
 
 // Stack overrides if the series should be stacked and using which mode (default not stacked).
-func Stack(mode StackMode) OverrideOption {
-	return func(field *sdk.FieldConfigOverride) {
-		field.Properties = append(field.Properties,
-			sdk.FieldConfigOverrideProperty{
-				ID: "custom.stacking",
-				Value: map[string]interface{}{
-					"group": false,
-					"mode":  string(mode),
-				},
-			})
-	}
-}
+func Stack(mode StackMode) OverrideOption { _ = "STUB: not implemented"; return *new(OverrideOption) }

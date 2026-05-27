@@ -14,22 +14,9 @@ type Link struct {
 
 // New creates a new logs panel.
 func New(title string, url string, options ...Option) Link {
-	link := &Link{Builder: sdk.Link{
-		Title: title,
-		URL:   &url,
-	}}
-
-	for _, opt := range options {
-		opt(link)
-	}
-
-	return *link
+	_ = "STUB: not implemented"
+	return *new(Link)
 }
 
 // OpenBlank configures the link to open in a new tab.
-func OpenBlank() Option {
-	return func(link *Link) {
-		yep := true
-		link.Builder.TargetBlank = &yep
-	}
-}
+func OpenBlank() Option { _ = "STUB: not implemented"; return *new(Option) }

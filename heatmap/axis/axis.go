@@ -1,9 +1,5 @@
 package axis
 
-import (
-	"fmt"
-)
-
 // Option represents an option that can be used to configure a Y axis.
 type Option func(axis *YAxis)
 
@@ -23,48 +19,16 @@ type YAxis struct {
 }
 
 // New creates a new YAxis configuration.
-func New(options ...Option) *YAxis {
-	axis := &YAxis{
-		Builder: &SDKAxis{
-			Format:  "short",
-			LogBase: 1,
-			Show:    true,
-		},
-	}
-
-	for _, opt := range options {
-		opt(axis)
-	}
-
-	return axis
-}
+func New(options ...Option) *YAxis { _ = "STUB: not implemented"; return nil }
 
 // Unit sets the unit of the data displayed on this axis.
-func Unit(unit string) Option {
-	return func(axis *YAxis) {
-		axis.Builder.Format = unit
-	}
-}
+func Unit(unit string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Decimals set the number of decimals to be displayed on the axis.
-func Decimals(decimals int) Option {
-	return func(axis *YAxis) {
-		axis.Builder.Decimals = &decimals
-	}
-}
+func Decimals(decimals int) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Min sets the minimum value expected on this axis.
-func Min(min float64) Option {
-	return func(axis *YAxis) {
-		minStr := fmt.Sprintf("%f", min)
-		axis.Builder.Min = &minStr
-	}
-}
+func Min(min float64) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Max sets the maximum value expected on this axis.
-func Max(max float64) Option {
-	return func(axis *YAxis) {
-		maxStr := fmt.Sprintf("%f", max)
-		axis.Builder.Max = &maxStr
-	}
-}
+func Max(max float64) Option { _ = "STUB: not implemented"; return *new(Option) }

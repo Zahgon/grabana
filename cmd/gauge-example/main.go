@@ -65,6 +65,4 @@ func main() {
 	fmt.Printf("The deed is done:\n%s\n", os.Args[1]+dash.URL)
 }
 
-func float64Ptr(input float64) *float64 {
-	return &input
-}
+func float64Ptr(input float64) *float64 { _ = "STUB: not implemented"; return nil }

@@ -38,58 +38,22 @@ type Threshold struct {
 
 // New creates a new Threshold configuration.
 func New(fieldConfig *sdk.FieldConfig, options ...Option) *Threshold {
-	threshold := &Threshold{fieldConfig: fieldConfig}
-
-	defaultOpts := []Option{
-		Style(AsLines),
-		ValueMode(Absolute),
-		BaseColor("green"),
-	}
-	for _, opt := range append(defaultOpts, options...) {
-		opt(threshold)
-	}
-
-	return threshold
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Style defines the thresholds display style.
-func Style(style DisplayStyle) Option {
-	return func(thresholds *Threshold) {
-		thresholds.fieldConfig.Defaults.Custom.ThresholdsStyle.Mode = string(style)
-	}
-}
+func Style(style DisplayStyle) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // BaseColor defines the color of the thresholds' base.
-func BaseColor(color string) Option {
-	return func(thresholds *Threshold) {
-		thresholds.baseColor = color
-	}
-}
+func BaseColor(color string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // ValueMode defines how to interpret the threshold values.
-func ValueMode(mode Mode) Option {
-	return func(thresholds *Threshold) {
-		thresholds.fieldConfig.Defaults.Thresholds.Mode = string(mode)
-	}
-}
+func ValueMode(mode Mode) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Steps defines threshold steps.
-func Steps(steps ...Step) Option {
-	return func(thresholds *Threshold) {
-		sdkSteps := make([]sdk.ThresholdStep, 0, len(steps))
+func Steps(steps ...Step) Option { _ = "STUB: not implemented"; return *new(Option) }
 
-		for i := range steps {
-			sdkSteps = append(sdkSteps, sdk.ThresholdStep{
-				Color: steps[i].Color,
-				Value: &steps[i].Value,
-			})
-		}
+// Base
 
-		thresholds.fieldConfig.Defaults.Thresholds.Steps = append(
-			// Base
-			[]sdk.ThresholdStep{{Color: thresholds.baseColor}},
-			// User-defined steps
-			sdkSteps...,
-		)
-	}
-}
+// User-defined steps

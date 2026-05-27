@@ -54,163 +54,60 @@ type Alert struct {
 }
 
 // New creates a new alert.
-func New(name string, options ...Option) *Alert {
-	nope := false
+func New(name string, options ...Option) *Alert { _ = "STUB: not implemented"; return nil }
 
-	alert := &Alert{
-		Builder: &sdk.Alert{
-			Name: name,
-			Rules: []sdk.AlertRule{
-				{
-					GrafanaAlert: &sdk.GrafanaAlert{
-						Title:     name,
-						Condition: alertConditionRef,
-						Data: []sdk.AlertQuery{
-							{
-								RefID:         alertConditionRef,
-								QueryType:     "",
-								DatasourceUID: "-100",
-								Model: sdk.AlertModel{
-									RefID: alertConditionRef,
-									Type:  "classic_conditions",
-									Hide:  &nope,
-									Datasource: sdk.AlertDatasourceRef{
-										UID:  "-100",
-										Type: "__expr__",
-									},
-									Conditions: []sdk.AlertCondition{},
-								},
-							},
-						},
-					},
-					Annotations: map[string]string{},
-					Labels:      map[string]string{},
-				},
-			},
-		},
-	}
+func defaults() []Option { _ = "STUB: not implemented"; return nil }
 
-	for _, opt := range append(defaults(), options...) {
-		opt(alert)
-	}
+func (alert *Alert) HookDatasourceUID(uid string) { _ = "STUB: not implemented"; return }
 
-	return alert
-}
+func (alert *Alert) HookDashboardUID(uid string) { _ = "STUB: not implemented"; return }
 
-func defaults() []Option {
-	return []Option{
-		EvaluateEvery("1m"),
-		For("5m"),
-		OnNoData(NoDataEmpty),
-		OnExecutionError(ErrorAlerting),
-	}
-}
-
-func (alert *Alert) HookDatasourceUID(uid string) {
-	for _, rule := range alert.Builder.Rules {
-		for i := range rule.GrafanaAlert.Data {
-			query := &rule.GrafanaAlert.Data[i]
-
-			if query.RefID == alertConditionRef {
-				continue
-			}
-
-			query.DatasourceUID = uid
-			query.Model.Datasource.UID = uid
-		}
-	}
-}
-
-func (alert *Alert) HookDashboardUID(uid string) {
-	for _, rule := range alert.Builder.Rules {
-		rule.Annotations["__dashboardUid__"] = uid
-	}
-}
-
-func (alert *Alert) HookPanelID(id string) {
-	for _, rule := range alert.Builder.Rules {
-		rule.Annotations["__panelId__"] = id
-	}
-}
+func (alert *Alert) HookPanelID(id string) { _ = "STUB: not implemented"; return }
 
 // Summary sets the summary associated to the alert.
-func Summary(content string) Option {
-	return func(alert *Alert) {
-		alert.Builder.Rules[0].Annotations["summary"] = content
-	}
-}
+func Summary(content string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Description sets the description associated to the alert.
-func Description(content string) Option {
-	return func(alert *Alert) {
-		alert.Builder.Rules[0].Annotations["description"] = content
-	}
-}
+func Description(content string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Runbook sets the runbook URL associated to the alert.
-func Runbook(url string) Option {
-	return func(alert *Alert) {
-		alert.Builder.Rules[0].Annotations["runbook_url"] = url
-	}
-}
+func Runbook(url string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // For sets the time interval during which a query violating the threshold
 // before the alert being actually triggered.
 // See https://grafana.com/docs/grafana/latest/alerting/rules/#for
-func For(duration string) Option {
-	return func(alert *Alert) {
-		alert.Builder.Rules[0].For = duration
-	}
-}
+func For(duration string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // EvaluateEvery defines the evaluation interval.
-func EvaluateEvery(interval string) Option {
-	return func(alert *Alert) {
-		alert.Builder.Interval = interval
-	}
-}
+func EvaluateEvery(interval string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // OnExecutionError defines the behavior on execution error.
 // See https://grafana.com/docs/grafana/latest/alerting/rules/#execution-errors-or-timeouts
-func OnExecutionError(mode ErrorMode) Option {
-	return func(alert *Alert) {
-		alert.Builder.Rules[0].GrafanaAlert.ExecutionErrorState = string(mode)
-	}
-}
+func OnExecutionError(mode ErrorMode) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // OnNoData defines the behavior when the query returns no data.
 // See https://grafana.com/docs/grafana/latest/alerting/rules/#no-data-null-values
-func OnNoData(mode NoDataMode) Option {
-	return func(alert *Alert) {
-		alert.Builder.Rules[0].GrafanaAlert.NoDataState = string(mode)
-	}
-}
+func OnNoData(mode NoDataMode) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // If defines a single condition that will trigger the alert.
 // See https://grafana.com/docs/grafana/latest/alerting/rules/#conditions
 func If(reducer QueryReducer, queryRef string, evaluator ConditionEvaluator) Option {
-	return ifOperand(And, reducer, queryRef, evaluator)
+	_ = "STUB: not implemented"
+	return *new(Option)
 }
 
 // IfOr defines a single condition that will trigger the alert.
 // See https://grafana.com/docs/grafana/latest/alerting/rules/#conditions
 func IfOr(reducer QueryReducer, queryRef string, evaluator ConditionEvaluator) Option {
-	return ifOperand(Or, reducer, queryRef, evaluator)
+	_ = "STUB: not implemented"
+	return *new(Option)
 }
 
 func ifOperand(operand Operator, reducer QueryReducer, queryRef string, evaluator ConditionEvaluator) Option {
-	return func(alert *Alert) {
-		cond := newCondition(reducer, queryRef, evaluator)
-		cond.builder.Operator = sdk.AlertOperator{Type: string(operand)}
-
-		alert.Builder.Rules[0].GrafanaAlert.Data[0].Model.Conditions = append(alert.Builder.Rules[0].GrafanaAlert.Data[0].Model.Conditions, *cond.builder)
-	}
+	_ = "STUB: not implemented"
+	return *new(Option)
 }
 
 // Tags defines a set of tags that will be forwarded to the notifications
 // channels when the alert will tbe triggered or used to route the alert.
-func Tags(tags map[string]string) Option {
-	return func(alert *Alert) {
-		alert.Builder.Rules[0].Labels = tags
-	}
-}
+func Tags(tags map[string]string) Option { _ = "STUB: not implemented"; return *new(Option) }

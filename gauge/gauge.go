@@ -1,9 +1,6 @@
 package gauge
 
 import (
-	"fmt"
-
-	"github.com/K-Phoen/grabana/errors"
 	"github.com/K-Phoen/grabana/links"
 	"github.com/K-Phoen/grabana/scheme"
 	"github.com/K-Phoen/grabana/target/graphite"
@@ -79,307 +76,100 @@ type Gauge struct {
 
 // New creates a new gauge panel.
 func New(title string, options ...Option) (*Gauge, error) {
-	panel := &Gauge{Builder: sdk.NewGauge(title)}
-
-	panel.Builder.IsNew = false
-
-	for _, opt := range append(defaults(), options...) {
-		if err := opt(panel); err != nil {
-			return nil, err
-		}
-	}
-
-	return panel, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
-func defaults() []Option {
-	return []Option{
-		Span(6),
-		ValueType(LastNonNull),
-		Orientation(OrientationVertical),
-		NoValue("N/A"),
-		ColorScheme(scheme.ThresholdsValue(scheme.Last)),
-	}
-}
+func defaults() []Option { _ = "STUB: not implemented"; return nil }
 
 // Links adds links to be displayed on this panel.
-func Links(panelLinks ...links.Link) Option {
-	return func(gauge *Gauge) error {
-		gauge.Builder.Links = make([]sdk.Link, 0, len(panelLinks))
-
-		for _, link := range panelLinks {
-			gauge.Builder.Links = append(gauge.Builder.Links, link.Builder)
-		}
-
-		return nil
-	}
-}
+func Links(panelLinks ...links.Link) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // DataSource sets the data source to be used by the panel.
-func DataSource(source string) Option {
-	return func(gauge *Gauge) error {
-		gauge.Builder.Datasource = &sdk.DatasourceRef{LegacyName: source}
-
-		return nil
-	}
-}
+func DataSource(source string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // WithPrometheusTarget adds a prometheus query to the graph.
 func WithPrometheusTarget(query string, options ...prometheus.Option) Option {
-	target := prometheus.New(query, options...)
-
-	return func(gauge *Gauge) error {
-		gauge.Builder.AddTarget(&sdk.Target{
-			RefID:          target.Ref,
-			Hide:           target.Hidden,
-			Expr:           target.Expr,
-			IntervalFactor: target.IntervalFactor,
-			Interval:       target.Interval,
-			Step:           target.Step,
-			LegendFormat:   target.LegendFormat,
-			Instant:        target.Instant,
-			Format:         target.Format,
-		})
-
-		return nil
-	}
+	_ = "STUB: not implemented"
+	return *new(Option)
 }
 
 // WithGraphiteTarget adds a Graphite target to the graph.
 func WithGraphiteTarget(query string, options ...graphite.Option) Option {
-	target := graphite.New(query, options...)
-
-	return func(gauge *Gauge) error {
-		gauge.Builder.AddTarget(target.Builder)
-
-		return nil
-	}
+	_ = "STUB: not implemented"
+	return *new(Option)
 }
 
 // WithInfluxDBTarget adds an InfluxDB target to the graph.
 func WithInfluxDBTarget(query string, options ...influxdb.Option) Option {
-	target := influxdb.New(query, options...)
-
-	return func(gauge *Gauge) error {
-		gauge.Builder.AddTarget(target.Builder)
-
-		return nil
-	}
+	_ = "STUB: not implemented"
+	return *new(Option)
 }
 
 // WithStackdriverTarget adds a stackdriver query to the graph.
 func WithStackdriverTarget(target *stackdriver.Stackdriver) Option {
-	return func(gauge *Gauge) error {
-		gauge.Builder.AddTarget(target.Builder)
-
-		return nil
-	}
+	_ = "STUB: not implemented"
+	return *new(Option)
 }
 
 // Span sets the width of the panel, in grid units. Should be a positive
 // number between 1 and 12. Example: 6.
-func Span(span float32) Option {
-	return func(gauge *Gauge) error {
-		if span < 1 || span > 12 {
-			return fmt.Errorf("span must be between 1 and 12: %w", errors.ErrInvalidArgument)
-		}
-
-		gauge.Builder.Span = span
-
-		return nil
-	}
-}
+func Span(span float32) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Height sets the height of the panel, in pixels. Example: "400px".
-func Height(height string) Option {
-	return func(gauge *Gauge) error {
-		gauge.Builder.Height = &height
-
-		return nil
-	}
-}
+func Height(height string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Description annotates the current visualization with a human-readable description.
-func Description(content string) Option {
-	return func(gauge *Gauge) error {
-		gauge.Builder.Description = &content
-
-		return nil
-	}
-}
+func Description(content string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Transparent makes the background transparent.
-func Transparent() Option {
-	return func(gauge *Gauge) error {
-		gauge.Builder.Transparent = true
-
-		return nil
-	}
-}
+func Transparent() Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Unit sets the unit of the data displayed on this axis.
-func Unit(unit string) Option {
-	return func(gauge *Gauge) error {
-		gauge.Builder.GaugePanel.FieldConfig.Defaults.Unit = unit
-
-		return nil
-	}
-}
+func Unit(unit string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Decimals sets the number of decimals that should be displayed.
-func Decimals(count int) Option {
-	return func(gauge *Gauge) error {
-		if count < 0 {
-			return fmt.Errorf("decimals must be greater than 0: %w", errors.ErrInvalidArgument)
-		}
-
-		gauge.Builder.GaugePanel.FieldConfig.Defaults.Decimals = &count
-
-		return nil
-	}
-}
+func Decimals(count int) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // ValueType configures how the series will be reduced to a single value.
-func ValueType(valueType ReductionType) Option {
-	return func(gauge *Gauge) error {
-		var valType string
-
-		switch valueType {
-		case First:
-			valType = "first"
-		case FirstNonNull:
-			valType = "firstNotNull"
-		case Last:
-			valType = "last"
-		case LastNonNull:
-			valType = "lastNotNull"
-
-		case Min:
-			valType = "min"
-		case Max:
-			valType = "max"
-		case Avg:
-			valType = "mean"
-
-		case Count:
-			valType = "count"
-		case Total:
-			valType = "sum"
-		case Range:
-			valType = "range"
-
-		default:
-			return fmt.Errorf("unknown value type: %w", errors.ErrInvalidArgument)
-		}
-		gauge.Builder.GaugePanel.Options.ReduceOptions.Calcs = []string{valType}
-
-		return nil
-	}
-}
+func ValueType(valueType ReductionType) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // ValueFontSize sets the font size used to display the value.
-func ValueFontSize(size int) Option {
-	return func(gauge *Gauge) error {
-		gauge.Builder.GaugePanel.Options.Text.ValueSize = size
-
-		return nil
-	}
-}
+func ValueFontSize(size int) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // TitleFontSize sets the font size used to display the title.
-func TitleFontSize(size int) Option {
-	return func(gauge *Gauge) error {
-		gauge.Builder.GaugePanel.Options.Text.TitleSize = size
-
-		return nil
-	}
-}
+func TitleFontSize(size int) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // AbsoluteThresholds changes the background and value colors dynamically within the
 // panel, depending on the value. The threshold is defined by a series of steps
 // values which, each having a value and an associated color.
 func AbsoluteThresholds(steps []ThresholdStep) Option {
-	return func(gauge *Gauge) error {
-		sdkSteps := make([]sdk.ThresholdStep, 0, len(steps))
-		for _, step := range steps {
-			sdkSteps = append(sdkSteps, sdk.ThresholdStep{
-				Color: step.Color,
-				Value: step.Value,
-			})
-		}
-
-		gauge.Builder.GaugePanel.FieldConfig.Defaults.Thresholds = sdk.Thresholds{
-			Mode:  "absolute",
-			Steps: sdkSteps,
-		}
-
-		return nil
-	}
+	_ = "STUB: not implemented"
+	return *new(Option)
 }
 
 // RelativeThresholds changes the background and value colors dynamically within the
 // panel, depending on the value. The threshold is defined by a series of steps
 // values which, each having a value defined as a percentage and an associated color.
 func RelativeThresholds(steps []ThresholdStep) Option {
-	return func(gauge *Gauge) error {
-		sdkSteps := make([]sdk.ThresholdStep, 0, len(steps))
-		for _, step := range steps {
-			sdkSteps = append(sdkSteps, sdk.ThresholdStep{
-				Color: step.Color,
-				Value: step.Value,
-			})
-		}
-
-		gauge.Builder.GaugePanel.FieldConfig.Defaults.Thresholds = sdk.Thresholds{
-			Mode:  "percentage",
-			Steps: sdkSteps,
-		}
-
-		return nil
-	}
+	_ = "STUB: not implemented"
+	return *new(Option)
 }
 
 // Repeat configures repeating a panel for a variable
-func Repeat(repeat string) Option {
-	return func(gauge *Gauge) error {
-		gauge.Builder.Repeat = &repeat
-
-		return nil
-	}
-}
+func Repeat(repeat string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // RepeatDirection configures repeating vertical or horizontal
 func RepeatDirection(direction sdk.RepeatDirection) Option {
-	return func(gauge *Gauge) error {
-		gauge.Builder.RepeatDirection = &direction
-
-		return nil
-	}
+	_ = "STUB: not implemented"
+	return *new(Option)
 }
 
 // ColorScheme configures the color scheme.
-func ColorScheme(options ...scheme.Option) Option {
-	return func(gauge *Gauge) error {
-		scheme.New(&gauge.Builder.GaugePanel.FieldConfig, options...)
-
-		return nil
-	}
-}
+func ColorScheme(options ...scheme.Option) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // NoValue defines what to show when there is no value.
-func NoValue(text string) Option {
-	return func(gauge *Gauge) error {
-		gauge.Builder.GaugePanel.FieldConfig.Defaults.NoValue = text
-
-		return nil
-	}
-}
+func NoValue(text string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Orientation changes the orientation of the layout.
-func Orientation(mode OrientationMode) Option {
-	return func(gauge *Gauge) error {
-		gauge.Builder.GaugePanel.Options.Orientation = string(mode)
-
-		return nil
-	}
-}
+func Orientation(mode OrientationMode) Option { _ = "STUB: not implemented"; return *new(Option) }

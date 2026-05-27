@@ -27,113 +27,18 @@ type Alert struct {
 	Targets []AlertTarget
 }
 
-func (a Alert) toOptions() ([]alert.Option, error) {
-	opts := []alert.Option{}
+func (a Alert) toOptions() ([]alert.Option, error) { _ = "STUB: not implemented"; return nil, nil }
 
-	if len(a.If) == 0 {
-		return nil, ErrNoConditionOnAlert
-	}
-	if len(a.Targets) == 0 {
-		return nil, ErrNoTargetOnAlert
-	}
-
-	if a.EvaluateEvery != "" {
-		opts = append(opts, alert.EvaluateEvery(a.EvaluateEvery))
-	}
-	if a.For != "" {
-		opts = append(opts, alert.For(a.For))
-	}
-
-	if a.OnNoData != "" {
-		noDataOpt, err := a.noDataOption()
-		if err != nil {
-			return nil, err
-		}
-
-		opts = append(opts, noDataOpt)
-	}
-	if a.OnExecutionError != "" {
-		execErrorOpt, err := a.executionErrorOption()
-		if err != nil {
-			return nil, err
-		}
-
-		opts = append(opts, execErrorOpt)
-	}
-	if a.Description != "" {
-		opts = append(opts, alert.Description(a.Description))
-	}
-	if a.Runbook != "" {
-		opts = append(opts, alert.Runbook(a.Runbook))
-	}
-	if len(a.Tags) != 0 {
-		opts = append(opts, alert.Tags(a.Tags))
-	}
-
-	for _, condition := range a.If {
-		conditionOpt, err := condition.toOption()
-		if err != nil {
-			return nil, err
-		}
-
-		opts = append(opts, conditionOpt)
-	}
-
-	targetOpts, err := a.targetOptions()
-	if err != nil {
-		return nil, err
-	}
-
-	return append(opts, targetOpts...), nil
-}
-
-func (a Alert) targetOptions() ([]alert.Option, error) {
-	opts := make([]alert.Option, 0, len(a.Targets))
-
-	for _, alertTarget := range a.Targets {
-		opt, err := alertTarget.toOption()
-		if err != nil {
-			return nil, err
-		}
-
-		opts = append(opts, opt)
-	}
-
-	return opts, nil
-}
+func (a Alert) targetOptions() ([]alert.Option, error) { _ = "STUB: not implemented"; return nil, nil }
 
 func (a Alert) noDataOption() (alert.Option, error) {
-	var mode alert.NoDataMode
-
-	switch a.OnNoData {
-	case "no_data":
-		mode = alert.NoDataEmpty
-	case "alerting":
-		mode = alert.NoDataAlerting
-	case "ok":
-		mode = alert.NoDataOK
-	default:
-		return nil, fmt.Errorf("unknown on_no_data mode '%s'", a.OnNoData)
-	}
-
-	return alert.OnNoData(mode), nil
+	_ = "STUB: not implemented"
+	return *new(alert.Option), nil
 }
 
 func (a Alert) executionErrorOption() (alert.Option, error) {
-	var mode alert.ErrorMode
-
-	switch a.OnExecutionError {
-	case "alerting":
-		mode = alert.ErrorAlerting
-	case "error":
-		mode = alert.ErrorKO
-	case "ok":
-		mode = alert.ErrorOK
-	default:
-		return nil, fmt.Errorf("unknown on_execution_error mode '%s'", a.OnExecutionError)
-	}
-
-	return alert.OnExecutionError(mode), nil
+	_ = "STUB: not implemented"
+	return *new(alert.Option), nil
 }
 
 type AlertCondition struct {
@@ -158,81 +63,16 @@ type AlertCondition struct {
 }
 
 func (c AlertCondition) toOption() (alert.Option, error) {
-	var err error
-	alertOpt := alert.If
-
-	if c.Operand != nil {
-		switch *c.Operand {
-		case string(alert.And):
-			alertOpt = alert.If
-		case string(alert.Or):
-			alertOpt = alert.IfOr
-		default:
-			return nil, ErrInvalidAlertOperand
-		}
-	}
-
-	reducer, queryRef, err := c.queryReducer()
-	if err != nil {
-		return nil, err
-	}
-
-	threshold, err := c.toThresholdOption()
-	if err != nil {
-		return nil, err
-	}
-
-	return alertOpt(reducer, queryRef, threshold), nil
+	_ = "STUB: not implemented"
+	return *new(alert.Option), nil
 }
 
 func (c AlertCondition) queryReducer() (alert.QueryReducer, string, error) {
-	if c.Avg != nil {
-		return alert.Avg, *c.Avg, nil
-	}
-	if c.Sum != nil {
-		return alert.Sum, *c.Sum, nil
-	}
-	if c.Count != nil {
-		return alert.Count, *c.Count, nil
-	}
-	if c.Last != nil {
-		return alert.Last, *c.Last, nil
-	}
-	if c.Min != nil {
-		return alert.Min, *c.Min, nil
-	}
-	if c.Max != nil {
-		return alert.Max, *c.Max, nil
-	}
-	if c.Median != nil {
-		return alert.Median, *c.Median, nil
-	}
-	if c.Diff != nil {
-		return alert.Diff, *c.Diff, nil
-	}
-	if c.PercentDiff != nil {
-		return alert.PercentDiff, *c.PercentDiff, nil
-	}
-
-	return "", "", ErrInvalidAlertValueFunc
+	_ = "STUB: not implemented"
+	return *new(alert.QueryReducer), "", nil
 }
 
 func (c AlertCondition) toThresholdOption() (alert.ConditionEvaluator, error) {
-	if c.HasNoValue {
-		return alert.HasNoValue(), nil
-	}
-	if c.Above != nil {
-		return alert.IsAbove(*c.Above), nil
-	}
-	if c.Below != nil {
-		return alert.IsBelow(*c.Below), nil
-	}
-	if c.OutsideRange[0] != 0 && c.OutsideRange[1] != 0 {
-		return alert.IsOutsideRange(c.OutsideRange[0], c.OutsideRange[1]), nil
-	}
-	if c.WithinRange[0] != 0 && c.WithinRange[1] != 0 {
-		return alert.IsWithinRange(c.WithinRange[0], c.WithinRange[1]), nil
-	}
-
-	return nil, ErrNoAlertThresholdDefined
+	_ = "STUB: not implemented"
+	return *new(alert.ConditionEvaluator), nil
 }

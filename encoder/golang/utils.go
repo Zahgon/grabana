@@ -5,29 +5,15 @@ import (
 	"github.com/K-Phoen/sdk"
 )
 
-func panelSpan(panel sdk.Panel) float32 {
-	span := panel.Span
-	if span == 0 && panel.GridPos.H != nil {
-		span = float32(*panel.GridPos.W / 2) // 24 units per row to 12
-	}
+func panelSpan(panel sdk.Panel) float32 { _ = "STUB: not implemented"; return 0 }
 
-	return span
-}
+// 24 units per row to 12
 
-func qual(pkg string, name string) *jen.Statement {
-	return jen.Qual(packageImportPath+"/"+pkg, name)
-}
+func qual(pkg string, name string) *jen.Statement { _ = "STUB: not implemented"; return nil }
 
-func lit(v interface{}) *jen.Statement {
-	return jen.Lit(v)
-}
+func lit(v interface{}) *jen.Statement { _ = "STUB: not implemented"; return nil }
 
 func Map[I any, O any](input []I, mapFunc func(item I) O) []O {
-	results := make([]O, 0, len(input))
-
-	for _, item := range input {
-		results = append(results, mapFunc(item))
-	}
-
-	return results
+	_ = "STUB: not implemented"
+	return nil
 }

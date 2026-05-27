@@ -16,35 +16,12 @@ type slackType struct {
 // Webhook creates a Slack contact point type that sends alerts to a Slack webhook.
 // See https://api.slack.com/messaging/webhooks
 func Webhook(webhookURL string, opts ...Option) alertmanager.ContactPointOption {
-	slack := &slackType{
-		builder: &sdk.ContactPointType{
-			Type:     "slack",
-			Settings: map[string]interface{}{},
-			SecureSettings: map[string]interface{}{
-				"url": webhookURL,
-			},
-		},
-	}
-
-	for _, opt := range opts {
-		opt(slack)
-	}
-
-	return func(contact *alertmanager.Contact) {
-		contact.Builder.GrafanaManagedReceivers = append(contact.Builder.GrafanaManagedReceivers, *slack.builder)
-	}
+	_ = "STUB: not implemented"
+	return *new(alertmanager.ContactPointOption)
 }
 
 // Title defines a templated title that will be sent in Slack messages.
-func Title(templatedTitle string) Option {
-	return func(contactType *slackType) {
-		contactType.builder.Settings["title"] = templatedTitle
-	}
-}
+func Title(templatedTitle string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Body defines the body that will be sent in Slack messages.
-func Body(body string) Option {
-	return func(contactType *slackType) {
-		contactType.builder.Settings["text"] = body
-	}
-}
+func Body(body string) Option { _ = "STUB: not implemented"; return *new(Option) }

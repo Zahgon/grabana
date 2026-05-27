@@ -29,58 +29,23 @@ type Prometheus struct {
 }
 
 // New creates a new prometheus query.
-func New(query string, options ...Option) *Prometheus {
-	prometheus := &Prometheus{
-		Expr:   query,
-		Format: string(FormatTimeSeries),
-	}
-
-	for _, opt := range options {
-		opt(prometheus)
-	}
-
-	return prometheus
-}
+func New(query string, options ...Option) *Prometheus { _ = "STUB: not implemented"; return nil }
 
 // Legend sets the legend format.
-func Legend(legend string) Option {
-	return func(prometheus *Prometheus) {
-		prometheus.LegendFormat = legend
-	}
-}
+func Legend(legend string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Ref sets the reference ID for this query.
-func Ref(ref string) Option {
-	return func(prometheus *Prometheus) {
-		prometheus.Ref = ref
-	}
-}
+func Ref(ref string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Hide the query. Grafana does not send hidden queries to the data source,
 // but they can still be referenced in alerts.
-func Hide() Option {
-	return func(prometheus *Prometheus) {
-		prometheus.Hidden = true
-	}
-}
+func Hide() Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Instant marks the query as "instant, which means Prometheus will only return the latest scrapped value.
-func Instant() Option {
-	return func(prometheus *Prometheus) {
-		prometheus.Instant = true
-	}
-}
+func Instant() Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Format indicates how the data should be returned.
-func Format(format FormatMode) Option {
-	return func(prometheus *Prometheus) {
-		prometheus.Format = string(format)
-	}
-}
+func Format(format FormatMode) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // IntervalFactor sets the resolution factor.
-func IntervalFactor(factor int) Option {
-	return func(prometheus *Prometheus) {
-		prometheus.IntervalFactor = factor
-	}
-}
+func IntervalFactor(factor int) Option { _ = "STUB: not implemented"; return *new(Option) }

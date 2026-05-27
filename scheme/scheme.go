@@ -27,82 +27,33 @@ type Scheme struct {
 
 // New creates a new Scheme configuration.
 func New(fieldConfig *sdk.FieldConfig, options ...Option) *Scheme {
-	scheme := &Scheme{fieldConfig: fieldConfig}
-
-	for _, opt := range options {
-		opt(scheme)
-	}
-
-	return scheme
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // SingleColor defines the color scheme with a single color.
-func SingleColor(color string) Option {
-	return func(thresholds *Scheme) {
-		thresholds.fieldConfig.Defaults.Color.Mode = "fixed"
-		thresholds.fieldConfig.Defaults.Color.FixedColor = color
-	}
-}
+func SingleColor(color string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // ClassicPalette uses the classic palette color scheme.
-func ClassicPalette() Option {
-	return func(thresholds *Scheme) {
-		thresholds.fieldConfig.Defaults.Color.Mode = "palette-classic"
-	}
-}
+func ClassicPalette() Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // ThresholdsValue uses the thresholds colors.
-func ThresholdsValue(colorBy ColorMode) Option {
-	return func(thresholds *Scheme) {
-		thresholds.fieldConfig.Defaults.Color.Mode = "thresholds"
-		thresholds.fieldConfig.Defaults.Color.SeriesBy = string(colorBy)
-	}
-}
+func ThresholdsValue(colorBy ColorMode) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // GreenYellowRed uses the green-yellow-red color scheme.
-func GreenYellowRed(colorBy ColorMode) Option {
-	return func(thresholds *Scheme) {
-		thresholds.fieldConfig.Defaults.Color.Mode = "continuous-GrYlRd"
-		thresholds.fieldConfig.Defaults.Color.SeriesBy = string(colorBy)
-	}
-}
+func GreenYellowRed(colorBy ColorMode) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // YellowRed uses the yellow-red color scheme.
-func YellowRed(colorBy ColorMode) Option {
-	return func(thresholds *Scheme) {
-		thresholds.fieldConfig.Defaults.Color.Mode = "continuous-YlRd"
-		thresholds.fieldConfig.Defaults.Color.SeriesBy = string(colorBy)
-	}
-}
+func YellowRed(colorBy ColorMode) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // YellowBlue uses the yellow-blue color scheme.
-func YellowBlue(colorBy ColorMode) Option {
-	return func(thresholds *Scheme) {
-		thresholds.fieldConfig.Defaults.Color.Mode = "continuous-YlBl"
-		thresholds.fieldConfig.Defaults.Color.SeriesBy = string(colorBy)
-	}
-}
+func YellowBlue(colorBy ColorMode) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // RedYellowGreen uses the red-yellow-green color scheme.
-func RedYellowGreen(colorBy ColorMode) Option {
-	return func(thresholds *Scheme) {
-		thresholds.fieldConfig.Defaults.Color.Mode = "continuous-RdYlGr"
-		thresholds.fieldConfig.Defaults.Color.SeriesBy = string(colorBy)
-	}
-}
+func RedYellowGreen(colorBy ColorMode) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // BlueYellowRed uses the blue-yellow-red color scheme.
-func BlueYellowRed(colorBy ColorMode) Option {
-	return func(thresholds *Scheme) {
-		thresholds.fieldConfig.Defaults.Color.Mode = "continuous-BlYlRd"
-		thresholds.fieldConfig.Defaults.Color.SeriesBy = string(colorBy)
-	}
-}
+func BlueYellowRed(colorBy ColorMode) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // BluePurple uses the blue-purple color scheme.
-func BluePurple(colorBy ColorMode) Option {
-	return func(thresholds *Scheme) {
-		thresholds.fieldConfig.Defaults.Color.Mode = "continuous-BlPu"
-		thresholds.fieldConfig.Defaults.Color.SeriesBy = string(colorBy)
-	}
-}
+func BluePurple(colorBy ColorMode) Option { _ = "STUB: not implemented"; return *new(Option) }

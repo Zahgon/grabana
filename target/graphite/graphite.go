@@ -11,31 +11,11 @@ type Graphite struct {
 }
 
 // New creates a new Graphite query.
-func New(query string, options ...Option) *Graphite {
-	graphite := &Graphite{
-		Builder: &sdk.Target{
-			Target: query,
-		},
-	}
-
-	for _, opt := range options {
-		opt(graphite)
-	}
-
-	return graphite
-}
+func New(query string, options ...Option) *Graphite { _ = "STUB: not implemented"; return nil }
 
 // Ref sets the reference ID for this query.
-func Ref(ref string) Option {
-	return func(graphite *Graphite) {
-		graphite.Builder.RefID = ref
-	}
-}
+func Ref(ref string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Hide the query. Grafana does not send hidden queries to the data source,
 // but they can still be referenced in alerts.
-func Hide() Option {
-	return func(graphite *Graphite) {
-		graphite.Builder.Hide = true
-	}
-}
+func Hide() Option { _ = "STUB: not implemented"; return *new(Option) }

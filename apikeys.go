@@ -2,10 +2,7 @@ package grabana
 
 import (
 	"context"
-	"encoding/json"
 	"errors"
-	"fmt"
-	"net/http"
 )
 
 // ErrAPIKeyNotFound is returned when the given API key can not be found.
@@ -20,21 +17,7 @@ const (
 	ViewerRole
 )
 
-func (role APIKeyRole) MarshalJSON() ([]byte, error) {
-	var s string
-	switch role {
-	case ViewerRole:
-		s = "Viewer"
-	case EditorRole:
-		s = "Editor"
-	case AdminRole:
-		s = "Admin"
-	default:
-		s = "None"
-	}
-
-	return json.Marshal(s)
-}
+func (role APIKeyRole) MarshalJSON() ([]byte, error) { _ = "STUB: not implemented"; return nil, nil }
 
 // CreateAPIKeyRequest represents a request made to the API key creation endpoint.
 type CreateAPIKeyRequest struct {
@@ -51,83 +34,18 @@ type APIKey struct {
 
 // CreateAPIKey creates a new API key.
 func (client *Client) CreateAPIKey(ctx context.Context, request CreateAPIKeyRequest) (string, error) {
-	buf, err := json.Marshal(request)
-	if err != nil {
-		return "", err
-	}
-
-	resp, err := client.sendJSON(ctx, http.MethodPost, "/api/auth/keys", buf)
-	if err != nil {
-		return "", err
-	}
-
-	defer func() { _ = resp.Body.Close() }()
-
-	if resp.StatusCode != http.StatusOK {
-		return "", client.httpError(resp)
-	}
-
-	var response struct {
-		Key string `json:"key"`
-	}
-	if err := decodeJSON(resp.Body, &response); err != nil {
-		return "", err
-	}
-
-	return response.Key, nil
+	_ = "STUB: not implemented"
+	return "", nil
 }
 
 // DeleteAPIKeyByName deletes an API key given its name.
 func (client *Client) DeleteAPIKeyByName(ctx context.Context, name string) error {
-	apiKeys, err := client.APIKeys(ctx)
-	if err != nil {
-		return err
-	}
-
-	keyToDelete, ok := apiKeys[name]
-	if !ok {
-		return ErrAPIKeyNotFound
-	}
-
-	resp, err := client.delete(ctx, fmt.Sprintf("/api/auth/keys/%d", keyToDelete.ID))
-	if err != nil {
-		return err
-	}
-
-	defer func() { _ = resp.Body.Close() }()
-
-	if resp.StatusCode == http.StatusNotFound {
-		return ErrAPIKeyNotFound
-	}
-	if resp.StatusCode != http.StatusOK {
-		return client.httpError(resp)
-	}
-
+	_ = "STUB: not implemented"
 	return nil
 }
 
 // APIKeys lists active API keys.
 func (client *Client) APIKeys(ctx context.Context) (map[string]APIKey, error) {
-	resp, err := client.get(ctx, "/api/auth/keys")
-	if err != nil {
-		return nil, err
-	}
-
-	defer func() { _ = resp.Body.Close() }()
-
-	if resp.StatusCode != http.StatusOK {
-		return nil, client.httpError(resp)
-	}
-
-	var keys []APIKey
-	if err := decodeJSON(resp.Body, &keys); err != nil {
-		return nil, err
-	}
-
-	keysMap := make(map[string]APIKey, len(keys))
-	for _, key := range keys {
-		keysMap[key.Name] = key
-	}
-
-	return keysMap, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }

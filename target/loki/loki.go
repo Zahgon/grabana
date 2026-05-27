@@ -12,36 +12,14 @@ type Loki struct {
 }
 
 // New creates a new prometheus query.
-func New(query string, options ...Option) *Loki {
-	loki := &Loki{
-		Expr: query,
-	}
-
-	for _, opt := range options {
-		opt(loki)
-	}
-
-	return loki
-}
+func New(query string, options ...Option) *Loki { _ = "STUB: not implemented"; return nil }
 
 // Legend sets the legend format.
-func Legend(legend string) Option {
-	return func(loki *Loki) {
-		loki.LegendFormat = legend
-	}
-}
+func Legend(legend string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Ref sets the reference ID for this query.
-func Ref(ref string) Option {
-	return func(loki *Loki) {
-		loki.Ref = ref
-	}
-}
+func Ref(ref string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Hide the query. Grafana does not send hidden queries to the data source,
 // but they can still be referenced in alerts.
-func Hide() Option {
-	return func(loki *Loki) {
-		loki.Hidden = true
-	}
-}
+func Hide() Option { _ = "STUB: not implemented"; return *new(Option) }

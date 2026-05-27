@@ -1,8 +1,6 @@
 package email
 
 import (
-	"strings"
-
 	"github.com/K-Phoen/grabana/alertmanager"
 	"github.com/K-Phoen/sdk"
 )
@@ -17,36 +15,13 @@ type emailType struct {
 
 // To creates an "email" contact point type.
 func To(emails []string, opts ...Option) alertmanager.ContactPointOption {
-	email := &emailType{
-		builder: &sdk.ContactPointType{
-			Type: "email",
-			Settings: map[string]interface{}{
-				"addresses": strings.Join(emails, ","),
-			},
-			SecureSettings: make(map[string]interface{}),
-		},
-	}
-
-	for _, opt := range opts {
-		opt(email)
-	}
-
-	return func(contact *alertmanager.Contact) {
-		contact.Builder.GrafanaManagedReceivers = append(contact.Builder.GrafanaManagedReceivers, *email.builder)
-	}
+	_ = "STUB: not implemented"
+	return *new(alertmanager.ContactPointOption)
 }
 
 // Single send a single email to all recipients.
-func Single() Option {
-	return func(contactType *emailType) {
-		contactType.builder.Settings["singleEmail"] = true
-	}
-}
+func Single() Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Message sets an optional message that will be included in the email.
 // Variables are allowed.
-func Message(content string) Option {
-	return func(contactType *emailType) {
-		contactType.builder.Settings["message"] = content
-	}
-}
+func Message(content string) Option { _ = "STUB: not implemented"; return *new(Option) }

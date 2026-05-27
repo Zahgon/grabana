@@ -56,106 +56,40 @@ type Query struct {
 }
 
 // New creates a new "query" templated variable.
-func New(name string, options ...Option) *Query {
-	query := &Query{Builder: sdk.TemplateVar{
-		Name:    name,
-		Label:   name,
-		Type:    "query",
-		Options: []sdk.Option{},
-	}}
-
-	for _, opt := range append([]Option{Refresh(DashboardLoad)}, options...) {
-		opt(query)
-	}
-
-	return query
-}
+func New(name string, options ...Option) *Query { _ = "STUB: not implemented"; return nil }
 
 // DataSource sets the data source to be used by the query.
-func DataSource(source string) Option {
-	return func(query *Query) {
-		query.Builder.Datasource = &sdk.DatasourceRef{LegacyName: source}
-	}
-}
+func DataSource(source string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Request defines the query to be executed.
-func Request(request string) Option {
-	return func(query *Query) {
-		query.Builder.Query = request
-	}
-}
+func Request(request string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Sort defines the order in which the values will be sorted.
-func Sort(order SortOrder) Option {
-	return func(query *Query) {
-		query.Builder.Sort = int(order)
-	}
-}
+func Sort(order SortOrder) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Refresh defines the interval in which the values will be refreshed.
-func Refresh(refresh RefreshInterval) Option {
-	return func(query *Query) {
-		value := int64(refresh)
-		query.Builder.Refresh = sdk.BoolInt{Flag: true, Value: &value}
-	}
-}
+func Refresh(refresh RefreshInterval) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Regex defines a filter allowing to filter the values returned by the request/query.
-func Regex(regex string) Option {
-	return func(query *Query) {
-		query.Builder.Regex = regex
-	}
-}
+func Regex(regex string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Label sets the label of the variable.
-func Label(label string) Option {
-	return func(query *Query) {
-		query.Builder.Label = label
-	}
-}
+func Label(label string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // HideLabel ensures that this variable's label will not be displayed.
-func HideLabel() Option {
-	return func(query *Query) {
-		query.Builder.Hide = 1
-	}
-}
+func HideLabel() Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Hide ensures that the variable will not be displayed.
-func Hide() Option {
-	return func(query *Query) {
-		query.Builder.Hide = 2
-	}
-}
+func Hide() Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Multiple allows several values to be selected.
-func Multiple() Option {
-	return func(query *Query) {
-		query.Builder.Multi = true
-	}
-}
+func Multiple() Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // IncludeAll adds an option to allow all values to be selected.
-func IncludeAll() Option {
-	return func(query *Query) {
-		query.Builder.IncludeAll = true
-		query.Builder.Options = append(query.Builder.Options, sdk.Option{
-			Text:  "All",
-			Value: All,
-		})
-	}
-}
+func IncludeAll() Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // DefaultAll selects "All" values by default.
-func DefaultAll() Option {
-	return func(query *Query) {
-		query.Builder.Current = sdk.Current{Text: &sdk.StringSliceString{Value: []string{"All"}, Valid: true}, Value: All}
-	}
-}
+func DefaultAll() Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // AllValue defines a custom "all" value.
-func AllValue(value string) Option {
-	return func(query *Query) {
-		query.Builder.AllValue = value
-	}
-}
+func AllValue(value string) Option { _ = "STUB: not implemented"; return *new(Option) }

@@ -1,9 +1,6 @@
 package prometheus
 
 import (
-	"encoding/json"
-	"net/http"
-
 	"github.com/K-Phoen/grabana/datasource"
 	"github.com/K-Phoen/sdk"
 )
@@ -30,35 +27,13 @@ type Prometheus struct {
 type Option func(datasource *Prometheus) error
 
 func New(name string, url string, options ...Option) (Prometheus, error) {
-	prometheus := &Prometheus{
-		builder: &sdk.Datasource{
-			Name:           name,
-			Type:           "prometheus",
-			Access:         "proxy",
-			URL:            url,
-			JSONData:       map[string]interface{}{},
-			SecureJSONData: map[string]interface{}{},
-		},
-	}
-
-	defaults := []Option{
-		HTTPMethod(http.MethodPost),
-		AccessMode(Proxy),
-	}
-
-	for _, opt := range append(defaults, options...) {
-		if err := opt(prometheus); err != nil {
-			return *prometheus, err
-		}
-	}
-
-	return *prometheus, nil
+	_ = "STUB: not implemented"
+	return *new(Prometheus), nil
 }
 
-func (datasource Prometheus) Name() string {
-	return datasource.builder.Name
-}
+func (datasource Prometheus) Name() string { _ = "STUB: not implemented"; return "" }
 
 func (datasource Prometheus) MarshalJSON() ([]byte, error) {
-	return json.Marshal(datasource.builder)
+	_ = "STUB: not implemented"
+	return nil, nil
 }

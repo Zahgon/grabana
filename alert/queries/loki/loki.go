@@ -15,54 +15,15 @@ type Loki struct {
 }
 
 // New creates a new loki query.
-func New(ref string, query string, options ...Option) *Loki {
-	nope := false
+func New(ref string, query string, options ...Option) *Loki { _ = "STUB: not implemented"; return nil }
 
-	loki := &Loki{
-		Builder: sdk.AlertQuery{
-			RefID:             ref,
-			QueryType:         "",
-			DatasourceUID:     "__FILL_ME__",
-			RelativeTimeRange: &sdk.AlertRelativeTimeRange{},
-			Model: sdk.AlertModel{
-				RefID:  ref,
-				Expr:   query,
-				Format: "time_series",
-				Hide:   &nope,
-				Datasource: sdk.AlertDatasourceRef{
-					UID:  "__FILL_ME__",
-					Type: "loki",
-				},
-				Interval:   "",
-				IntervalMs: 15000,
-			},
-		},
-	}
-
-	for _, opt := range append(defaults(), options...) {
-		opt(loki)
-	}
-
-	return loki
-}
-
-func defaults() []Option {
-	return []Option{
-		TimeRange(10*time.Minute, 0),
-	}
-}
+func defaults() []Option { _ = "STUB: not implemented"; return nil }
 
 // TimeRange sets the legend format.
 func TimeRange(from time.Duration, to time.Duration) Option {
-	return func(loki *Loki) {
-		loki.Builder.RelativeTimeRange.From = int(from.Seconds())
-		loki.Builder.RelativeTimeRange.To = int(to.Seconds())
-	}
+	_ = "STUB: not implemented"
+	return *new(Option)
 }
 
 // Legend sets the legend format.
-func Legend(legend string) Option {
-	return func(loki *Loki) {
-		loki.Builder.Model.LegendFormat = legend
-	}
-}
+func Legend(legend string) Option { _ = "STUB: not implemented"; return *new(Option) }

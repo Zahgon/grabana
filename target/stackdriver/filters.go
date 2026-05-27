@@ -10,33 +10,21 @@ type filter struct {
 }
 
 func Eq(leftOperand string, rightOperand string) FilterOption {
-	return func(filter *filter) {
-		filter.operator = "="
-		filter.leftOperand = leftOperand
-		filter.rightOperand = rightOperand
-	}
+	_ = "STUB: not implemented"
+	return *new(FilterOption)
 }
 
 func Neq(leftOperand string, rightOperand string) FilterOption {
-	return func(filter *filter) {
-		filter.operator = "!="
-		filter.leftOperand = leftOperand
-		filter.rightOperand = rightOperand
-	}
+	_ = "STUB: not implemented"
+	return *new(FilterOption)
 }
 
 func Matches(leftOperand string, rightOperand string) FilterOption {
-	return func(filter *filter) {
-		filter.operator = "=~"
-		filter.leftOperand = leftOperand
-		filter.rightOperand = rightOperand
-	}
+	_ = "STUB: not implemented"
+	return *new(FilterOption)
 }
 
 func NotMatches(leftOperand string, rightOperand string) FilterOption {
-	return func(filter *filter) {
-		filter.operator = "!=~"
-		filter.leftOperand = leftOperand
-		filter.rightOperand = rightOperand
-	}
+	_ = "STUB: not implemented"
+	return *new(FilterOption)
 }

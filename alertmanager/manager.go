@@ -1,8 +1,6 @@
 package alertmanager
 
 import (
-	"encoding/json"
-
 	"github.com/K-Phoen/sdk"
 )
 
@@ -16,78 +14,37 @@ type Manager struct {
 }
 
 // New creates a new alert manager.
-func New(opts ...Option) *Manager {
-	manager := &Manager{
-		builder: &sdk.AlertManager{},
-	}
-
-	for _, opt := range opts {
-		opt(manager)
-	}
-
-	return manager
-}
+func New(opts ...Option) *Manager { _ = "STUB: not implemented"; return nil }
 
 // ContactPoints defines the contact points that can receive alerts.
-func ContactPoints(contactPoints ...Contact) Option {
-	return func(manager *Manager) {
-		config := &manager.builder.Config
-		config.Receivers = nil
+func ContactPoints(contactPoints ...Contact) Option { _ = "STUB: not implemented"; return *new(Option) }
 
-		for i, point := range contactPoints {
-			config.Receivers = append(config.Receivers, *point.Builder)
-
-			// we must have a default contact point, so we use the first contact point
-			// if none is already set.
-			if i == 0 && config.Route.Receiver == "" {
-				config.Route.Receiver = point.Builder.Name
-			}
-		}
-	}
-}
+// we must have a default contact point, so we use the first contact point
+// if none is already set.
 
 // DefaultContactPoint sets the default contact point to be used when no
 // specific routing policy applies.
 func DefaultContactPoint(contactPoint string) Option {
-	return func(manager *Manager) {
-		manager.builder.Config.Route.Receiver = contactPoint
-	}
+	_ = "STUB: not implemented"
+	return *new(Option)
 }
 
 // DefaultGroupBys sets the default labels that alerts should be grouped by.
-func DefaultGroupBys(labels ...string) Option {
-	return func(manager *Manager) {
-		manager.builder.Config.Route.GroupBy = labels
-	}
-}
+func DefaultGroupBys(labels ...string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Templates defines templates that can be used when sending messages to
 // contact points.
 // See https://prometheus.io/blog/2016/03/03/custom-alertmanager-templates/
-func Templates(templates map[string]string) Option {
-	return func(manager *Manager) {
-		manager.builder.TemplateFiles = templates
-	}
-}
+func Templates(templates map[string]string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Routing configures the routing policies to apply on alerts.
-func Routing(policies ...RoutingPolicy) Option {
-	return func(manager *Manager) {
-		config := &manager.builder.Config
-		config.Route.Routes = nil
-
-		for _, policy := range policies {
-			config.Route.Routes = append(config.Route.Routes, *policy.builder)
-		}
-	}
-}
+func Routing(policies ...RoutingPolicy) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // MarshalJSON implements the encoding/json.Marshaler interface.
-func (manager *Manager) MarshalJSON() ([]byte, error) {
-	return json.Marshal(manager.builder)
-}
+func (manager *Manager) MarshalJSON() ([]byte, error) { _ = "STUB: not implemented"; return nil, nil }
 
 // MarshalIndentJSON renders the manager as indented JSON.
 func (manager *Manager) MarshalIndentJSON() ([]byte, error) {
-	return json.MarshalIndent(manager.builder, "", "  ")
+	_ = "STUB: not implemented"
+	return nil, nil
 }

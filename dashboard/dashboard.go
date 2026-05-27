@@ -3,9 +3,6 @@ package dashboard
 import (
 	// We're not using it for security stuff, so it's fine.
 	//nolint:gosec
-	"crypto/sha1"
-	"encoding/hex"
-	"encoding/json"
 
 	"github.com/K-Phoen/grabana/alert"
 	"github.com/K-Phoen/grabana/row"
@@ -53,39 +50,13 @@ type Builder struct {
 
 // New creates a new dashboard builder.
 func New(title string, options ...Option) (Builder, error) {
-	board := sdk.NewBoard(title)
-	board.ID = 0
-
-	builder := &Builder{board: board}
-
-	for _, opt := range append(defaults(), options...) {
-		if err := opt(builder); err != nil {
-			return *builder, err
-		}
-	}
-
-	return *builder, nil
+	_ = "STUB: not implemented"
+	return *new(Builder), nil
 }
 
-func defaults() []Option {
-	return []Option{
-		defaultTimePicker(),
-		Timezone(DefaultTimezone),
-		Time("now-3h", "now"),
-		SharedCrossHair(),
-	}
-}
+func defaults() []Option { _ = "STUB: not implemented"; return nil }
 
-func defaultTimePicker() Option {
-	return func(builder *Builder) error {
-		builder.board.Timepicker = sdk.Timepicker{
-			RefreshIntervals: []string{"5s", "10s", "30s", "1m", "5m", "15m", "30m", "1h", "2h", "1d"},
-			TimeOptions:      []string{"5m", "15m", "1h", "6h", "12h", "24h", "2d", "7d", "30d"},
-		}
-
-		return nil
-	}
-}
+func defaultTimePicker() Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // MarshalJSON implements the encoding/json.Marshaler interface.
 //
@@ -93,261 +64,123 @@ func defaultTimePicker() Option {
 // which your configuration management tool of choice can then feed into
 // Grafana's dashboard via its provisioning support.
 // See https://grafana.com/docs/grafana/latest/administration/provisioning/#dashboards
-func (builder *Builder) MarshalJSON() ([]byte, error) {
-	return json.Marshal(builder.board)
-}
+func (builder *Builder) MarshalJSON() ([]byte, error) { _ = "STUB: not implemented"; return nil, nil }
 
 // MarshalIndentJSON renders the dashboard as indented JSON
 // which your configuration management tool of choice can then feed into
 // Grafana's dashboard via its provisioning support.
 // See https://grafana.com/docs/grafana/latest/administration/provisioning/#dashboards
 func (builder *Builder) MarshalIndentJSON() ([]byte, error) {
-	return json.MarshalIndent(builder.board, "", "  ")
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // Alerts returns all the alerts defined in this dashboard.
-func (builder *Builder) Alerts() []*alert.Alert {
-	return builder.alerts
-}
+func (builder *Builder) Alerts() []*alert.Alert { _ = "STUB: not implemented"; return nil }
 
 // Internal.
-func (builder *Builder) Internal() *sdk.Board {
-	return builder.board
-}
+func (builder *Builder) Internal() *sdk.Board { _ = "STUB: not implemented"; return nil }
 
 // VariableAsConst adds a templated variable, defined as a set of constant
 // values.
 // See https://grafana.com/docs/grafana/latest/reference/templating/#variable-types
 func VariableAsConst(name string, options ...constant.Option) Option {
-	return func(builder *Builder) error {
-		templatedVar := constant.New(name, options...)
-
-		builder.board.Templating.List = append(builder.board.Templating.List, templatedVar.Builder)
-
-		return nil
-	}
+	_ = "STUB: not implemented"
+	return *new(Option)
 }
 
 // ID sets the ID used by the dashboard.
-func ID(id uint) Option {
-	return func(builder *Builder) error {
-		builder.board.ID = id
-
-		return nil
-	}
-}
+func ID(id uint) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // UID sets the UID used by the dashboard.
-func UID(uid string) Option {
-	return func(builder *Builder) error {
-		validUID := uid
+func UID(uid string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
-		if len(uid) > 40 {
-			// We're not using it for security stuff, so it's fine.
-			//nolint:gosec
-			sha := sha1.Sum([]byte(uid))
-			validUID = hex.EncodeToString(sha[:])
-		}
-
-		builder.board.UID = validUID
-
-		return nil
-	}
-}
+// We're not using it for security stuff, so it's fine.
+//nolint:gosec
 
 // Slug sets the Slug used by the dashboard.
-func Slug(slug string) Option {
-	return func(builder *Builder) error {
-		builder.board.Slug = slug
-
-		return nil
-	}
-}
+func Slug(slug string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // VariableAsCustom adds a templated variable, defined as a set of custom
 // values.
 // See https://grafana.com/docs/grafana/latest/reference/templating/#variable-types
 func VariableAsCustom(name string, options ...custom.Option) Option {
-	return func(builder *Builder) error {
-		templatedVar := custom.New(name, options...)
-
-		builder.board.Templating.List = append(builder.board.Templating.List, templatedVar.Builder)
-
-		return nil
-	}
+	_ = "STUB: not implemented"
+	return *new(Option)
 }
 
 // VariableAsInterval adds a templated variable, defined as an interval.
 // See https://grafana.com/docs/grafana/latest/reference/templating/#variable-types
 func VariableAsInterval(name string, options ...interval.Option) Option {
-	return func(builder *Builder) error {
-		templatedVar := interval.New(name, options...)
-
-		builder.board.Templating.List = append(builder.board.Templating.List, templatedVar.Builder)
-
-		return nil
-	}
+	_ = "STUB: not implemented"
+	return *new(Option)
 }
 
 // VariableAsQuery adds a templated variable, defined as a query.
 // See https://grafana.com/docs/grafana/latest/reference/templating/#variable-types
 func VariableAsQuery(name string, options ...query.Option) Option {
-	return func(builder *Builder) error {
-		templatedVar := query.New(name, options...)
-
-		builder.board.Templating.List = append(builder.board.Templating.List, templatedVar.Builder)
-
-		return nil
-	}
+	_ = "STUB: not implemented"
+	return *new(Option)
 }
 
 // VariableAsDatasource adds a templated variable, defined as a datasource.
 // See https://grafana.com/docs/grafana/latest/variables/variable-types/add-data-source-variable/
 func VariableAsDatasource(name string, options ...datasource.Option) Option {
-	return func(builder *Builder) error {
-		templatedVar := datasource.New(name, options...)
-
-		builder.board.Templating.List = append(builder.board.Templating.List, templatedVar.Builder)
-
-		return nil
-	}
+	_ = "STUB: not implemented"
+	return *new(Option)
 }
 
 // VariableAsText adds a templated variable, defined as a free text input.
 // See https://grafana.com/docs/grafana/latest/dashboards/variables/add-template-variables/#add-a-text-box-variable
 func VariableAsText(name string, options ...text.Option) Option {
-	return func(builder *Builder) error {
-		templatedVar := text.New(name, options...)
-
-		builder.board.Templating.List = append(builder.board.Templating.List, templatedVar.Builder)
-
-		return nil
-	}
+	_ = "STUB: not implemented"
+	return *new(Option)
 }
 
 // ExternalLinks adds a dashboard-level external links.
 // See https://grafana.com/docs/grafana/latest/dashboards/build-dashboards/manage-dashboard-links/#add-a-url-link-to-a-dashboard
-func ExternalLinks(links ...ExternalLink) Option {
-	return func(builder *Builder) error {
-		for _, link := range links {
-			builder.board.Links = append(builder.board.Links, link.asSdk())
-		}
-
-		return nil
-	}
-}
+func ExternalLinks(links ...ExternalLink) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // DashboardLinks adds a dashboard-level links to other dashboards.
 // See https://grafana.com/docs/grafana/latest/dashboards/build-dashboards/manage-dashboard-links/#dashboard-links
-func DashboardLinks(links ...DashboardLink) Option { //nolint:revive
-	return func(builder *Builder) error {
-		for _, link := range links {
-			builder.board.Links = append(builder.board.Links, link.asSdk())
-		}
-
-		return nil
-	}
+func DashboardLinks(links ...DashboardLink) Option {
+	_ = "STUB: not implemented" //nolint:revive
+	return *new(Option)
 }
 
 // Row adds a row to the dashboard.
 func Row(title string, options ...row.Option) Option {
-	return func(builder *Builder) error {
-		r, err := row.New(builder.board, title, options...)
-		if err != nil {
-			return err
-		}
-
-		builder.alerts = append(builder.alerts, r.Alerts()...)
-
-		return nil
-	}
+	_ = "STUB: not implemented"
+	return *new(Option)
 }
 
 // TagsAnnotation adds a new source of annotation for the dashboard.
 func TagsAnnotation(annotation TagAnnotation) Option {
-	return func(builder *Builder) error {
-		builder.board.Annotations.List = append(builder.board.Annotations.List, sdk.Annotation{
-			Name:       annotation.Name,
-			Datasource: &sdk.DatasourceRef{LegacyName: annotation.Datasource},
-			IconColor:  annotation.IconColor,
-			Enable:     true,
-			Tags:       annotation.Tags,
-			Type:       "tags",
-		})
-
-		return nil
-	}
+	_ = "STUB: not implemented"
+	return *new(Option)
 }
 
 // Editable marks the dashboard as editable.
-func Editable() Option {
-	return func(builder *Builder) error {
-		builder.board.Editable = true
-
-		return nil
-	}
-}
+func Editable() Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // ReadOnly marks the dashboard as non-editable.
-func ReadOnly() Option {
-	return func(builder *Builder) error {
-		builder.board.Editable = false
-
-		return nil
-	}
-}
+func ReadOnly() Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // SharedCrossHair configures the graph tooltip to be shared across panels.
-func SharedCrossHair() Option {
-	return func(builder *Builder) error {
-		builder.board.SharedCrosshair = true
-
-		return nil
-	}
-}
+func SharedCrossHair() Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // DefaultTooltip configures the graph tooltip NOT to be shared across panels.
-func DefaultTooltip() Option {
-	return func(builder *Builder) error {
-		builder.board.SharedCrosshair = false
-
-		return nil
-	}
-}
+func DefaultTooltip() Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Tags adds the given set of tags to the dashboard.
-func Tags(tags []string) Option {
-	return func(builder *Builder) error {
-		builder.board.Tags = tags
-
-		return nil
-	}
-}
+func Tags(tags []string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // AutoRefresh defines the auto-refresh interval for the dashboard.
-func AutoRefresh(interval string) Option {
-	return func(builder *Builder) error {
-		builder.board.Refresh = &sdk.BoolString{Flag: true, Value: interval}
-
-		return nil
-	}
-}
+func AutoRefresh(interval string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Time defines the default time range for the dashboard, e.g. from "now-6h" to
 // "now".
-func Time(from, to string) Option {
-	return func(builder *Builder) error {
-		builder.board.Time = sdk.Time{From: from, To: to}
-
-		return nil
-	}
-}
+func Time(from, to string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Timezone defines the default timezone for the dashboard, e.g. "utc".
-func Timezone(timezone TimezoneOption) Option {
-	return func(builder *Builder) error {
-		builder.board.Timezone = string(timezone)
-
-		return nil
-	}
-}
+func Timezone(timezone TimezoneOption) Option { _ = "STUB: not implemented"; return *new(Option) }

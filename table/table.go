@@ -1,9 +1,6 @@
 package table
 
 import (
-	"fmt"
-
-	"github.com/K-Phoen/grabana/errors"
 	"github.com/K-Phoen/grabana/links"
 	"github.com/K-Phoen/grabana/target/graphite"
 	"github.com/K-Phoen/grabana/target/influxdb"
@@ -48,213 +45,69 @@ type Table struct {
 
 // New creates a new table panel.
 func New(title string, options ...Option) (*Table, error) {
-	panel := &Table{Builder: sdk.NewTable(title)}
-	empty := ""
-
-	panel.Builder.IsNew = false
-	panel.Builder.TablePanel.Styles = []sdk.ColumnStyle{
-		{
-			Alias:   &empty,
-			Pattern: "/.*/",
-			Type:    "string",
-		},
-	}
-
-	for _, opt := range append(defaults(), options...) {
-		if err := opt(panel); err != nil {
-			return nil, err
-		}
-	}
-
-	return panel, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
-func defaults() []Option {
-	return []Option{
-		Span(6),
-		TimeSeriesToRows(),
-	}
-}
+func defaults() []Option { _ = "STUB: not implemented"; return nil }
 
 // Links adds links to be displayed on this panel.
-func Links(panelLinks ...links.Link) Option {
-	return func(table *Table) error {
-		table.Builder.Links = make([]sdk.Link, 0, len(panelLinks))
-
-		for _, link := range panelLinks {
-			table.Builder.Links = append(table.Builder.Links, link.Builder)
-		}
-
-		return nil
-	}
-}
+func Links(panelLinks ...links.Link) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // WithPrometheusTarget adds a prometheus target to the table.
 func WithPrometheusTarget(query string, options ...prometheus.Option) Option {
-	target := prometheus.New(query, options...)
-
-	return func(table *Table) error {
-		table.Builder.AddTarget(&sdk.Target{
-			RefID:          target.Ref,
-			Expr:           target.Expr,
-			IntervalFactor: target.IntervalFactor,
-			Interval:       target.Interval,
-			Step:           target.Step,
-			LegendFormat:   target.LegendFormat,
-			Instant:        target.Instant,
-			Format:         target.Format,
-		})
-
-		return nil
-	}
+	_ = "STUB: not implemented"
+	return *new(Option)
 }
 
 // WithGraphiteTarget adds a Graphite target to the table.
 func WithGraphiteTarget(query string, options ...graphite.Option) Option {
-	target := graphite.New(query, options...)
-
-	return func(table *Table) error {
-		table.Builder.AddTarget(target.Builder)
-
-		return nil
-	}
+	_ = "STUB: not implemented"
+	return *new(Option)
 }
 
 // WithInfluxDBTarget adds an InfluxDB target to the table.
 func WithInfluxDBTarget(query string, options ...influxdb.Option) Option {
-	target := influxdb.New(query, options...)
-
-	return func(table *Table) error {
-		table.Builder.AddTarget(target.Builder)
-
-		return nil
-	}
+	_ = "STUB: not implemented"
+	return *new(Option)
 }
 
 // HideColumn hides the column having a label matching the given pattern.
-func HideColumn(columnLabelPattern string) Option {
-	return func(table *Table) error {
-		table.Builder.TablePanel.Styles = append([]sdk.ColumnStyle{
-			{
-				Pattern: columnLabelPattern,
-				Type:    "hidden",
-			},
-		}, table.Builder.TablePanel.Styles...)
-
-		return nil
-	}
-}
+func HideColumn(columnLabelPattern string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // TimeSeriesToRows displays the data in rows.
-func TimeSeriesToRows() Option {
-	return func(table *Table) error {
-		table.Builder.TablePanel.Transform = "timeseries_to_rows"
-
-		return nil
-	}
-}
+func TimeSeriesToRows() Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // TimeSeriesToColumns displays the data in columns.
-func TimeSeriesToColumns() Option {
-	return func(table *Table) error {
-		table.Builder.TablePanel.Transform = "timeseries_to_columns"
-
-		return nil
-	}
-}
+func TimeSeriesToColumns() Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // AsJSON displays the data as JSON.
-func AsJSON() Option {
-	return func(table *Table) error {
-		table.Builder.TablePanel.Transform = "json"
-
-		return nil
-	}
-}
+func AsJSON() Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // AsTable displays the data as a table.
-func AsTable() Option {
-	return func(table *Table) error {
-		table.Builder.TablePanel.Transform = "table"
-
-		return nil
-	}
-}
+func AsTable() Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // AsAnnotations displays the data as annotations.
-func AsAnnotations() Option {
-	return func(table *Table) error {
-		table.Builder.TablePanel.Transform = "annotations"
-
-		return nil
-	}
-}
+func AsAnnotations() Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // AsTimeSeriesAggregations displays the data according to the given aggregation methods.
 func AsTimeSeriesAggregations(aggregations []Aggregation) Option {
-	return func(table *Table) error {
-		columns := make([]sdk.Column, 0, len(aggregations))
-
-		for _, aggregation := range aggregations {
-			columns = append(columns, sdk.Column{
-				TextType: aggregation.Label,
-				Value:    string(aggregation.Type),
-			})
-		}
-
-		table.Builder.TablePanel.Transform = "timeseries_aggregations"
-		table.Builder.TablePanel.Columns = columns
-
-		return nil
-	}
+	_ = "STUB: not implemented"
+	return *new(Option)
 }
 
 // DataSource sets the data source to be used by the table.
-func DataSource(source string) Option {
-	return func(table *Table) error {
-		table.Builder.Datasource = &sdk.DatasourceRef{LegacyName: source}
-
-		return nil
-	}
-}
+func DataSource(source string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Span sets the width of the panel, in grid units. Should be a positive
 // number between 1 and 12. Example: 6.
-func Span(span float32) Option {
-	return func(table *Table) error {
-		if span < 1 || span > 12 {
-			return fmt.Errorf("span must be between 1 and 12: %w", errors.ErrInvalidArgument)
-		}
-
-		table.Builder.Span = span
-
-		return nil
-	}
-}
+func Span(span float32) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Height sets the height of the panel, in pixels. Example: "400px".
-func Height(height string) Option {
-	return func(table *Table) error {
-		table.Builder.Height = &height
-
-		return nil
-	}
-}
+func Height(height string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Description annotates the current visualization with a human-readable description.
-func Description(content string) Option {
-	return func(table *Table) error {
-		table.Builder.Description = &content
-
-		return nil
-	}
-}
+func Description(content string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Transparent makes the background transparent.
-func Transparent() Option {
-	return func(table *Table) error {
-		table.Builder.Transparent = true
-
-		return nil
-	}
-}
+func Transparent() Option { _ = "STUB: not implemented"; return *new(Option) }

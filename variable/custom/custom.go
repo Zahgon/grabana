@@ -1,9 +1,6 @@
 package custom
 
 import (
-	"sort"
-	"strings"
-
 	"github.com/K-Phoen/sdk"
 )
 
@@ -15,26 +12,11 @@ type Option func(constant *Custom)
 // ValuesMap represent a "label" to "value" map of options for a custom variable.
 type ValuesMap map[string]string
 
-func (values ValuesMap) asQuery() string {
-	valuesList := make([]string, 0, len(values))
-
-	for _, value := range values {
-		valuesList = append(valuesList, value)
-	}
-
-	sort.Strings(valuesList)
-
-	return strings.Join(valuesList, ",")
-}
+func (values ValuesMap) asQuery() string { _ = "STUB: not implemented"; return "" }
 
 func (values ValuesMap) labelFor(value string) *sdk.StringSliceString {
-	for label, val := range values {
-		if val == value {
-			return &sdk.StringSliceString{Value: []string{label}, Valid: true}
-		}
-	}
-
-	return &sdk.StringSliceString{Value: []string{value}, Valid: true}
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Custom represents a "custom" templated variable.
@@ -44,95 +26,31 @@ type Custom struct {
 }
 
 // New creates a new "custom" templated variable.
-func New(name string, options ...Option) *Custom {
-	custom := &Custom{Builder: sdk.TemplateVar{
-		Name:    name,
-		Label:   name,
-		Type:    "custom",
-		Options: []sdk.Option{},
-	}}
-
-	for _, opt := range options {
-		opt(custom)
-	}
-
-	return custom
-}
+func New(name string, options ...Option) *Custom { _ = "STUB: not implemented"; return nil }
 
 // Values sets the possible values for the variable.
-func Values(values ValuesMap) Option {
-	return func(custom *Custom) {
-		for label, value := range values {
-			custom.Builder.Options = append(custom.Builder.Options, sdk.Option{
-				Text:  label,
-				Value: value,
-			})
-		}
-
-		custom.values = values
-		custom.Builder.Query = values.asQuery()
-	}
-}
+func Values(values ValuesMap) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Default sets the default value of the variable.
-func Default(value string) Option {
-	return func(custom *Custom) {
-		custom.Builder.Current = sdk.Current{
-			Text:  custom.values.labelFor(value),
-			Value: value,
-		}
-	}
-}
+func Default(value string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Label sets the label of the variable.
-func Label(label string) Option {
-	return func(custom *Custom) {
-		custom.Builder.Label = label
-	}
-}
+func Label(label string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // HideLabel ensures that this variable's label will not be displayed.
-func HideLabel() Option {
-	return func(custom *Custom) {
-		custom.Builder.Hide = 1
-	}
-}
+func HideLabel() Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Hide ensures that the variable will not be displayed.
-func Hide() Option {
-	return func(custom *Custom) {
-		custom.Builder.Hide = 2
-	}
-}
+func Hide() Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Multiple allows several values to be selected.
-func Multiple() Option {
-	return func(custom *Custom) {
-		custom.Builder.Multi = true
-	}
-}
+func Multiple() Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // IncludeAll adds an option to allow all values to be selected.
-func IncludeAll() Option {
-	return func(custom *Custom) {
-		custom.Builder.IncludeAll = true
-		custom.Builder.Options = append(custom.Builder.Options, sdk.Option{
-			Text:  "All",
-			Value: All,
-		})
-	}
-}
+func IncludeAll() Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // DefaultAll selects "All" values by default.
-func DefaultAll() Option {
-	return func(custom *Custom) {
-		custom.Builder.Current = sdk.Current{Text: &sdk.StringSliceString{Value: []string{"All"}, Valid: true}, Value: All}
-	}
-}
+func DefaultAll() Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // AllValue define the value used when selecting the "All" option.
-func AllValue(value string) Option {
-	return func(custom *Custom) {
-		custom.Builder.AllValue = value
-	}
-}
+func AllValue(value string) Option { _ = "STUB: not implemented"; return *new(Option) }

@@ -15,13 +15,6 @@ type DashboardExternalLink struct {
 }
 
 func (l DashboardExternalLink) toModel() dashboard.ExternalLink {
-	return dashboard.ExternalLink{
-		Title:                 l.Title,
-		Description:           l.Description,
-		URL:                   l.URL,
-		Icon:                  dashboard.LinkIcon(l.Icon),
-		IncludeTimeRange:      l.IncludeTimeRange,
-		IncludeVariableValues: l.IncludeVariableValues,
-		OpenInNewTab:          l.OpenInNewTab,
-	}
+	_ = "STUB: not implemented"
+	return *new(dashboard.ExternalLink)
 }

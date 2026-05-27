@@ -1,8 +1,6 @@
 package cloudwatch
 
 import (
-	"encoding/json"
-
 	"github.com/K-Phoen/grabana/datasource"
 	"github.com/K-Phoen/sdk"
 )
@@ -16,33 +14,13 @@ type CloudWatch struct {
 type Option func(datasource *CloudWatch) error
 
 func New(name string, options ...Option) (CloudWatch, error) {
-	cloudwatch := &CloudWatch{
-		builder: &sdk.Datasource{
-			Name:           name,
-			Type:           "cloudwatch",
-			Access:         "proxy",
-			JSONData:       map[string]interface{}{},
-			SecureJSONData: map[string]interface{}{},
-		},
-	}
-
-	defaults := []Option{
-		DefaultAuth(),
-	}
-
-	for _, opt := range append(defaults, options...) {
-		if err := opt(cloudwatch); err != nil {
-			return *cloudwatch, err
-		}
-	}
-
-	return *cloudwatch, nil
+	_ = "STUB: not implemented"
+	return *new(CloudWatch), nil
 }
 
-func (datasource CloudWatch) Name() string {
-	return datasource.builder.Name
-}
+func (datasource CloudWatch) Name() string { _ = "STUB: not implemented"; return "" }
 
 func (datasource CloudWatch) MarshalJSON() ([]byte, error) {
-	return json.Marshal(datasource.builder)
+	_ = "STUB: not implemented"
+	return nil, nil
 }

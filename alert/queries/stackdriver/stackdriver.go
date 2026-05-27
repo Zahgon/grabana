@@ -72,12 +72,14 @@ type Stackdriver struct {
 
 // Delta represents the change in a value during a time interval.
 func Delta(ref string, metricType string, options ...Option) *Stackdriver {
-	return newMetric(ref, "DELTA", metricType, options...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Gauge represents an instantaneous measurement of a value.
 func Gauge(ref string, metricType string, options ...Option) *Stackdriver {
-	return newMetric(ref, "GAUGE", metricType, options...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Cumulative represents a value accumulated over a time interval. Cumulative
@@ -85,115 +87,47 @@ func Gauge(ref string, metricType string, options ...Option) *Stackdriver {
 // increasing end times, until an event resets the cumulative value to zero
 // and sets a new start time for the following points.
 func Cumulative(ref string, metricType string, options ...Option) *Stackdriver {
-	return newMetric(ref, "CUMULATIVE", metricType, options...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // New creates a new stackdriver query.
 func newMetric(ref string, metricKind string, metricType string, options ...Option) *Stackdriver {
-	nope := false
-
-	stackdriver := &Stackdriver{
-		Builder: sdk.AlertQuery{
-			RefID:             ref,
-			QueryType:         "",
-			DatasourceUID:     "__FILL_ME__",
-			RelativeTimeRange: &sdk.AlertRelativeTimeRange{},
-			Model: sdk.AlertModel{
-				RefID:     ref,
-				Format:    "time_series",
-				QueryType: "metrics",
-				Hide:      &nope,
-				Datasource: sdk.AlertDatasourceRef{
-					UID:  "__FILL_ME__",
-					Type: "stackdriver",
-				},
-				Interval:   "",
-				IntervalMs: 15000,
-
-				MetricQuery: &sdk.StackdriverAlertQuery{
-					MetricKind: metricKind,
-					MetricType: metricType,
-				},
-			},
-		},
-	}
-
-	for _, opt := range append(defaults(), options...) {
-		opt(stackdriver)
-	}
-
-	return stackdriver
+	_ = "STUB: not implemented"
+	return nil
 }
 
-func defaults() []Option {
-	return []Option{
-		TimeRange(10*time.Minute, 0),
-	}
-}
+func defaults() []Option { _ = "STUB: not implemented"; return nil }
 
 // TimeRange sets the legend format.
 func TimeRange(from time.Duration, to time.Duration) Option {
-	return func(stackdriver *Stackdriver) {
-		stackdriver.Builder.RelativeTimeRange.From = int(from.Seconds())
-		stackdriver.Builder.RelativeTimeRange.To = int(to.Seconds())
-	}
+	_ = "STUB: not implemented"
+	return *new(Option)
 }
 
 // Legend sets the legend format.
-func Legend(legend string) Option {
-	return func(stackdriver *Stackdriver) {
-		stackdriver.Builder.Model.MetricQuery.AliasBy = legend
-	}
-}
+func Legend(legend string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Project defines the GCP project to use for this target.
-func Project(project string) Option {
-	return func(stackdriver *Stackdriver) {
-		stackdriver.Builder.Model.MetricQuery.ProjectName = project
-	}
-}
+func Project(project string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Aggregation defines how the time series will be aggregated.
-func Aggregation(reducer Reducer) Option {
-	return func(stackdriver *Stackdriver) {
-		stackdriver.Builder.Model.MetricQuery.CrossSeriesReducer = string(reducer)
-	}
-}
+func Aggregation(reducer Reducer) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Alignment defines how the time series will be aligned.
 func Alignment(aligner Aligner, alignmentPeriod string) Option {
-	return func(stackdriver *Stackdriver) {
-		stackdriver.Builder.Model.MetricQuery.AlignmentPeriod = alignmentPeriod
-		stackdriver.Builder.Model.MetricQuery.PerSeriesAligner = string(aligner)
-	}
+	_ = "STUB: not implemented"
+	return *new(Option)
 }
 
 // Preprocessor defines how the time series should be pre-processed.
 func Preprocessor(preprocessor PreprocessorMethod) Option {
-	return func(stackdriver *Stackdriver) {
-		stackdriver.Builder.Model.MetricQuery.Preprocessor = string(preprocessor)
-	}
+	_ = "STUB: not implemented"
+	return *new(Option)
 }
 
 // Filter allows to specify which time series will be in the results.
-func Filter(filters ...FilterOption) Option {
-	return func(stackdriver *Stackdriver) {
-		for i, filterOpt := range filters {
-			f := &filter{}
-			filterOpt(f)
-
-			if i != 0 || len(stackdriver.Builder.Model.MetricQuery.Filters) != 0 {
-				stackdriver.Builder.Model.MetricQuery.Filters = append(stackdriver.Builder.Model.MetricQuery.Filters, "AND")
-			}
-
-			stackdriver.Builder.Model.MetricQuery.Filters = append(stackdriver.Builder.Model.MetricQuery.Filters, f.leftOperand, f.operator, f.rightOperand)
-		}
-	}
-}
+func Filter(filters ...FilterOption) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // GroupBys defines a list of fields to group the query by.
-func GroupBys(groupBys ...string) Option {
-	return func(stackdriver *Stackdriver) {
-		stackdriver.Builder.Model.MetricQuery.GroupBys = groupBys
-	}
-}
+func GroupBys(groupBys ...string) Option { _ = "STUB: not implemented"; return *new(Option) }

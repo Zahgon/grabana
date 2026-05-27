@@ -11,24 +11,6 @@ type RowIR struct {
 	Panels    []jen.Code
 }
 
-func (encoder *Encoder) encodeRow(row RowIR) *jen.Statement {
-	rowSettings := []jen.Code{
-		lit(row.Title),
-	}
+func (encoder *Encoder) encodeRow(row RowIR) *jen.Statement { _ = "STUB: not implemented"; return nil }
 
-	if row.RepeatFor != nil {
-		rowSettings = append(rowSettings, rowQual("RepeatFor").Call(lit(*row.RepeatFor)))
-	}
-
-	if row.Collapsed {
-		rowSettings = append(rowSettings, rowQual("Collapse").Call())
-	}
-
-	rowSettings = append(rowSettings, row.Panels...)
-
-	return dashboardQual("Row").MultiLineCall(rowSettings...)
-}
-
-func rowQual(name string) *jen.Statement {
-	return qual("row", name)
-}
+func rowQual(name string) *jen.Statement { _ = "STUB: not implemented"; return nil }

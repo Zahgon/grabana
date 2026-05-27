@@ -14,12 +14,6 @@ type DashboardInternalLink struct {
 }
 
 func (l DashboardInternalLink) toModel() dashboard.DashboardLink {
-	return dashboard.DashboardLink{
-		Title:                 l.Title,
-		Tags:                  l.Tags,
-		AsDropdown:            l.AsDropdown,
-		IncludeTimeRange:      l.IncludeTimeRange,
-		IncludeVariableValues: l.IncludeVariableValues,
-		OpenInNewTab:          l.OpenInNewTab,
-	}
+	_ = "STUB: not implemented"
+	return *new(dashboard.DashboardLink)
 }

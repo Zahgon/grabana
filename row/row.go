@@ -25,208 +25,83 @@ type Row struct {
 
 // New creates a new row.
 func New(board *sdk.Board, title string, options ...Option) (*Row, error) {
-	panel := &Row{builder: board.AddRow(title)}
-
-	for _, opt := range append(defaults(), options...) {
-		if err := opt(panel); err != nil {
-			return nil, err
-		}
-	}
-
-	return panel, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
-func defaults() []Option {
-	return []Option{
-		ShowTitle(),
-	}
-}
+func defaults() []Option { _ = "STUB: not implemented"; return nil }
 
 // Alerts returns a list of alerts defined within this row.
 func (row *Row) Alerts() []*alert.Alert {
-	return row.alerts
+	_ = "STUB: not implemented"
+
+	// WithGraph adds a "graph" panel in the row.
+	// Deprecated: use WithTimeSeries() instead.
+	return nil
 }
 
-// WithGraph adds a "graph" panel in the row.
-// Deprecated: use WithTimeSeries() instead.
 func WithGraph(title string, options ...graph.Option) Option {
-	return func(row *Row) error {
-		panel, err := graph.New(title, options...)
-		if err != nil {
-			return err
-		}
-
-		row.builder.Add(panel.Builder)
-
-		if panel.Alert == nil {
-			return nil
-		}
-
-		if panel.Builder.Datasource != nil {
-			panel.Alert.Datasource = panel.Builder.Datasource.LegacyName
-		}
-
-		row.alerts = append(row.alerts, panel.Alert)
-
-		return nil
-	}
+	_ = "STUB: not implemented"
+	return *new(Option)
 }
 
 // WithTimeSeries adds a "timeseries" panel in the row.
 func WithTimeSeries(title string, options ...timeseries.Option) Option {
-	return func(row *Row) error {
-		panel, err := timeseries.New(title, options...)
-		if err != nil {
-			return err
-		}
-
-		row.builder.Add(panel.Builder)
-
-		if panel.Alert == nil {
-			return nil
-		}
-
-		if panel.Builder.Datasource != nil {
-			panel.Alert.Datasource = panel.Builder.Datasource.LegacyName
-		}
-
-		row.alerts = append(row.alerts, panel.Alert)
-
-		return nil
-	}
+	_ = "STUB: not implemented"
+	return *new(Option)
 }
 
 // WithGauge adds a "gauge" panel in the row.
 func WithGauge(title string, options ...gauge.Option) Option {
-	return func(row *Row) error {
-		panel, err := gauge.New(title, options...)
-		if err != nil {
-			return err
-		}
-
-		row.builder.Add(panel.Builder)
-
-		return nil
-	}
+	_ = "STUB: not implemented"
+	return *new(Option)
 }
 
 // WithLogs adds a "logs" panel in the row.
 func WithLogs(title string, options ...logs.Option) Option {
-	return func(row *Row) error {
-		panel, err := logs.New(title, options...)
-		if err != nil {
-			return err
-		}
-
-		row.builder.Add(panel.Builder)
-
-		return nil
-	}
+	_ = "STUB: not implemented"
+	return *new(Option)
 }
 
 // WithSingleStat adds a "single stat" panel in the row.
 // Deprecated: use WithStat() instead
 func WithSingleStat(title string, options ...singlestat.Option) Option {
-	return func(row *Row) error {
-		panel, err := singlestat.New(title, options...)
-		if err != nil {
-			return err
-		}
-
-		row.builder.Add(panel.Builder)
-
-		return nil
-	}
+	_ = "STUB: not implemented"
+	return *new(Option)
 }
 
 // WithStat adds a "stat" panel in the row.
 func WithStat(title string, options ...stat.Option) Option {
-	return func(row *Row) error {
-		panel, err := stat.New(title, options...)
-		if err != nil {
-			return err
-		}
-
-		row.builder.Add(panel.Builder)
-
-		return nil
-	}
+	_ = "STUB: not implemented"
+	return *new(Option)
 }
 
 // WithTable adds a "table" panel in the row.
 func WithTable(title string, options ...table.Option) Option {
-	return func(row *Row) error {
-		panel, err := table.New(title, options...)
-		if err != nil {
-			return err
-		}
-
-		row.builder.Add(panel.Builder)
-
-		return nil
-	}
+	_ = "STUB: not implemented"
+	return *new(Option)
 }
 
 // WithText adds a "text" panel in the row.
 func WithText(title string, options ...text.Option) Option {
-	return func(row *Row) error {
-		panel, err := text.New(title, options...)
-		if err != nil {
-			return err
-		}
-
-		row.builder.Add(panel.Builder)
-
-		return nil
-	}
+	_ = "STUB: not implemented"
+	return *new(Option)
 }
 
 // WithHeatmap adds a "heatmap" panel in the row.
 func WithHeatmap(title string, options ...heatmap.Option) Option {
-	return func(row *Row) error {
-		panel, err := heatmap.New(title, options...)
-		if err != nil {
-			return err
-		}
-
-		row.builder.Add(panel.Builder)
-
-		return nil
-	}
+	_ = "STUB: not implemented"
+	return *new(Option)
 }
 
 // ShowTitle ensures that the title of the row will be displayed.
-func ShowTitle() Option {
-	return func(row *Row) error {
-		row.builder.ShowTitle = true
-
-		return nil
-	}
-}
+func ShowTitle() Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // HideTitle ensures that the title of the row will NOT be displayed.
-func HideTitle() Option {
-	return func(row *Row) error {
-		row.builder.ShowTitle = false
-
-		return nil
-	}
-}
+func HideTitle() Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // RepeatFor will repeat the row for all values of the given variable.
-func RepeatFor(variable string) Option {
-	return func(row *Row) error {
-		row.builder.Repeat = &variable
-
-		return nil
-	}
-}
+func RepeatFor(variable string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Collapse makes the row collapsed by default.
-func Collapse() Option {
-	return func(row *Row) error {
-		row.builder.Collapse = true
-
-		return nil
-	}
-}
+func Collapse() Option { _ = "STUB: not implemented"; return *new(Option) }

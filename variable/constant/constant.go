@@ -1,9 +1,6 @@
 package constant
 
 import (
-	"sort"
-	"strings"
-
 	"github.com/K-Phoen/sdk"
 )
 
@@ -13,26 +10,11 @@ type Option func(constant *Constant)
 // ValuesMap represent a "label" to "value" map of options for a constant variable.
 type ValuesMap map[string]string
 
-func (values ValuesMap) asQuery() string {
-	valuesList := make([]string, 0, len(values))
-
-	for _, value := range values {
-		valuesList = append(valuesList, value)
-	}
-
-	sort.Strings(valuesList)
-
-	return strings.Join(valuesList, ",")
-}
+func (values ValuesMap) asQuery() string { _ = "STUB: not implemented"; return "" }
 
 func (values ValuesMap) labelFor(value string) *sdk.StringSliceString {
-	for label, val := range values {
-		if val == value {
-			return &sdk.StringSliceString{Value: []string{label}, Valid: true}
-		}
-	}
-
-	return &sdk.StringSliceString{Value: []string{value}, Valid: true}
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Constant represents a "constant" templated variable.
@@ -42,63 +24,19 @@ type Constant struct {
 }
 
 // New creates a new "constant" templated variable.
-func New(name string, options ...Option) *Constant {
-	constant := &Constant{Builder: sdk.TemplateVar{
-		Name:    name,
-		Label:   name,
-		Type:    "constant",
-		Options: []sdk.Option{},
-	}}
-
-	for _, opt := range options {
-		opt(constant)
-	}
-
-	return constant
-}
+func New(name string, options ...Option) *Constant { _ = "STUB: not implemented"; return nil }
 
 // Values sets the possible values for the variable.
-func Values(values ValuesMap) Option {
-	return func(constant *Constant) {
-		for label, value := range values {
-			constant.Builder.Options = append(constant.Builder.Options, sdk.Option{
-				Text:  label,
-				Value: value,
-			})
-		}
-
-		constant.values = values
-		constant.Builder.Query = values.asQuery()
-	}
-}
+func Values(values ValuesMap) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Default sets the default value of the variable.
-func Default(value string) Option {
-	return func(constant *Constant) {
-		constant.Builder.Current = sdk.Current{
-			Text:  constant.values.labelFor(value),
-			Value: value,
-		}
-	}
-}
+func Default(value string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Label sets the label of the variable.
-func Label(label string) Option {
-	return func(constant *Constant) {
-		constant.Builder.Label = label
-	}
-}
+func Label(label string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // HideLabel ensures that this variable's label will not be displayed.
-func HideLabel() Option {
-	return func(constant *Constant) {
-		constant.Builder.Hide = 1
-	}
-}
+func HideLabel() Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Hide ensures that the variable will not be displayed.
-func Hide() Option {
-	return func(constant *Constant) {
-		constant.Builder.Hide = 2
-	}
-}
+func Hide() Option { _ = "STUB: not implemented"; return *new(Option) }

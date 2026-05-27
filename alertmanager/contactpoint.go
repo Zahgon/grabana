@@ -15,15 +15,6 @@ type Contact struct {
 
 // ContactPoint defines a new contact point.
 func ContactPoint(name string, opts ...ContactPointOption) Contact {
-	contactPoint := &Contact{
-		Builder: &sdk.ContactPoint{
-			Name: name,
-		},
-	}
-
-	for _, opt := range opts {
-		opt(contactPoint)
-	}
-
-	return *contactPoint
+	_ = "STUB: not implemented"
+	return *new(Contact)
 }

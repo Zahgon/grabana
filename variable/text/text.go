@@ -13,38 +13,13 @@ type Text struct {
 }
 
 // New creates a new "query" templated variable.
-func New(name string, options ...Option) *Text {
-	query := &Text{Builder: sdk.TemplateVar{
-		Name:    name,
-		Label:   name,
-		Type:    "textbox",
-		Options: []sdk.Option{},
-	}}
-
-	for _, opt := range options {
-		opt(query)
-	}
-
-	return query
-}
+func New(name string, options ...Option) *Text { _ = "STUB: not implemented"; return nil }
 
 // Label sets the label of the variable.
-func Label(label string) Option {
-	return func(query *Text) {
-		query.Builder.Label = label
-	}
-}
+func Label(label string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // HideLabel ensures that this variable's label will not be displayed.
-func HideLabel() Option {
-	return func(query *Text) {
-		query.Builder.Hide = 1
-	}
-}
+func HideLabel() Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Hide ensures that the variable will not be displayed.
-func Hide() Option {
-	return func(query *Text) {
-		query.Builder.Hide = 2
-	}
-}
+func Hide() Option { _ = "STUB: not implemented"; return *new(Option) }

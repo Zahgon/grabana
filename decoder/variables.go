@@ -4,12 +4,6 @@ import (
 	"fmt"
 
 	"github.com/K-Phoen/grabana/dashboard"
-	"github.com/K-Phoen/grabana/variable/constant"
-	"github.com/K-Phoen/grabana/variable/custom"
-	"github.com/K-Phoen/grabana/variable/datasource"
-	"github.com/K-Phoen/grabana/variable/interval"
-	"github.com/K-Phoen/grabana/variable/query"
-	"github.com/K-Phoen/grabana/variable/text"
 )
 
 var ErrVariableNotConfigured = fmt.Errorf("variable not configured")
@@ -25,26 +19,8 @@ type DashboardVariable struct {
 }
 
 func (variable *DashboardVariable) toOption() (dashboard.Option, error) {
-	if variable.Query != nil {
-		return variable.Query.toOption()
-	}
-	if variable.Interval != nil {
-		return variable.Interval.toOption()
-	}
-	if variable.Const != nil {
-		return variable.Const.toOption()
-	}
-	if variable.Custom != nil {
-		return variable.Custom.toOption()
-	}
-	if variable.Datasource != nil {
-		return variable.Datasource.toOption()
-	}
-	if variable.Text != nil {
-		return variable.Text.toOption()
-	}
-
-	return nil, ErrVariableNotConfigured
+	_ = "STUB: not implemented"
+	return *new(dashboard.Option), nil
 }
 
 type VariableInterval struct {
@@ -56,31 +32,11 @@ type VariableInterval struct {
 }
 
 func (variable *VariableInterval) toOption() (dashboard.Option, error) {
-	opts := []interval.Option{
-		interval.Values(variable.Values),
-	}
-
-	if variable.Label != "" {
-		opts = append(opts, interval.Label(variable.Label))
-	}
-	if variable.Default != "" {
-		opts = append(opts, interval.Default(variable.Default))
-	}
-
-	switch variable.Hide {
-	case "":
-		// Nothing to do
-		break
-	case "label":
-		opts = append(opts, interval.HideLabel())
-	case "variable":
-		opts = append(opts, interval.Hide())
-	default:
-		return dashboard.VariableAsInterval(variable.Name), ErrInvalidHideValue
-	}
-
-	return dashboard.VariableAsInterval(variable.Name, opts...), nil
+	_ = "STUB: not implemented"
+	return *new(dashboard.Option), nil
 }
+
+// Nothing to do
 
 type VariableCustom struct {
 	Name       string
@@ -94,40 +50,11 @@ type VariableCustom struct {
 }
 
 func (variable *VariableCustom) toOption() (dashboard.Option, error) {
-	opts := []custom.Option{
-		custom.Values(variable.ValuesMap),
-	}
-
-	if variable.Default != "" {
-		opts = append(opts, custom.Default(variable.Default))
-	}
-	if variable.Label != "" {
-		opts = append(opts, custom.Label(variable.Label))
-	}
-	if variable.AllValue != "" {
-		opts = append(opts, custom.AllValue(variable.AllValue))
-	}
-	if variable.IncludeAll {
-		opts = append(opts, custom.IncludeAll())
-	}
-	if variable.Multiple {
-		opts = append(opts, custom.Multiple())
-	}
-
-	switch variable.Hide {
-	case "":
-		// Nothing to do
-		break
-	case "label":
-		opts = append(opts, custom.HideLabel())
-	case "variable":
-		opts = append(opts, custom.Hide())
-	default:
-		return dashboard.VariableAsCustom(variable.Name), ErrInvalidHideValue
-	}
-
-	return dashboard.VariableAsCustom(variable.Name, opts...), nil
+	_ = "STUB: not implemented"
+	return *new(dashboard.Option), nil
 }
+
+// Nothing to do
 
 type VariableConst struct {
 	Name      string
@@ -138,31 +65,11 @@ type VariableConst struct {
 }
 
 func (variable *VariableConst) toOption() (dashboard.Option, error) {
-	opts := []constant.Option{
-		constant.Values(variable.ValuesMap),
-	}
-
-	if variable.Default != "" {
-		opts = append(opts, constant.Default(variable.Default))
-	}
-	if variable.Label != "" {
-		opts = append(opts, constant.Label(variable.Label))
-	}
-
-	switch variable.Hide {
-	case "":
-		// Nothing to do
-		break
-	case "label":
-		opts = append(opts, constant.HideLabel())
-	case "variable":
-		opts = append(opts, constant.Hide())
-	default:
-		return dashboard.VariableAsConst(variable.Name), ErrInvalidHideValue
-	}
-
-	return dashboard.VariableAsConst(variable.Name, opts...), nil
+	_ = "STUB: not implemented"
+	return *new(dashboard.Option), nil
 }
+
+// Nothing to do
 
 type VariableQuery struct {
 	Name  string
@@ -180,46 +87,11 @@ type VariableQuery struct {
 }
 
 func (variable *VariableQuery) toOption() (dashboard.Option, error) {
-	opts := []query.Option{
-		query.Request(variable.Request),
-	}
-
-	if variable.Datasource != "" {
-		opts = append(opts, query.DataSource(variable.Datasource))
-	}
-	if variable.Label != "" {
-		opts = append(opts, query.Label(variable.Label))
-	}
-	if variable.Regex != "" {
-		opts = append(opts, query.Regex(variable.Regex))
-	}
-	if variable.AllValue != "" {
-		opts = append(opts, query.AllValue(variable.AllValue))
-	}
-	if variable.IncludeAll {
-		opts = append(opts, query.IncludeAll())
-	}
-	if variable.DefaultAll {
-		opts = append(opts, query.DefaultAll())
-	}
-	if variable.Multiple {
-		opts = append(opts, query.Multiple())
-	}
-
-	switch variable.Hide {
-	case "":
-		// Nothing to do
-		break
-	case "label":
-		opts = append(opts, query.HideLabel())
-	case "variable":
-		opts = append(opts, query.Hide())
-	default:
-		return dashboard.VariableAsQuery(variable.Name), ErrInvalidHideValue
-	}
-
-	return dashboard.VariableAsQuery(variable.Name, opts...), nil
+	_ = "STUB: not implemented"
+	return *new(dashboard.Option), nil
 }
+
+// Nothing to do
 
 type VariableDatasource struct {
 	Name  string
@@ -234,37 +106,11 @@ type VariableDatasource struct {
 }
 
 func (variable *VariableDatasource) toOption() (dashboard.Option, error) {
-	opts := []datasource.Option{
-		datasource.Type(variable.Type),
-	}
-
-	if variable.Label != "" {
-		opts = append(opts, datasource.Label(variable.Label))
-	}
-	if variable.Regex != "" {
-		opts = append(opts, datasource.Regex(variable.Regex))
-	}
-	if variable.IncludeAll {
-		opts = append(opts, datasource.IncludeAll())
-	}
-	if variable.Multiple {
-		opts = append(opts, datasource.Multiple())
-	}
-
-	switch variable.Hide {
-	case "":
-		// Nothing to do
-		break
-	case "label":
-		opts = append(opts, datasource.HideLabel())
-	case "variable":
-		opts = append(opts, datasource.Hide())
-	default:
-		return dashboard.VariableAsDatasource(variable.Name), ErrInvalidHideValue
-	}
-
-	return dashboard.VariableAsDatasource(variable.Name, opts...), nil
+	_ = "STUB: not implemented"
+	return *new(dashboard.Option), nil
 }
+
+// Nothing to do
 
 type VariableText struct {
 	Name  string
@@ -273,23 +119,8 @@ type VariableText struct {
 }
 
 func (variable *VariableText) toOption() (dashboard.Option, error) {
-	var opts []text.Option
-
-	if variable.Label != "" {
-		opts = append(opts, text.Label(variable.Label))
-	}
-
-	switch variable.Hide {
-	case "":
-		// Nothing to do
-		break
-	case "label":
-		opts = append(opts, text.HideLabel())
-	case "variable":
-		opts = append(opts, text.Hide())
-	default:
-		return dashboard.VariableAsQuery(variable.Name), ErrInvalidHideValue
-	}
-
-	return dashboard.VariableAsText(variable.Name, opts...), nil
+	_ = "STUB: not implemented"
+	return *new(dashboard.Option), nil
 }
+
+// Nothing to do
